@@ -1,0 +1,124 @@
+html,
+body {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+}
+
+.navbar {
+    background-color: #0080A2;
+    overflow: hidden;
+}
+
+.navbar a {
+    float: right;
+    display: block;
+    color: white;
+    padding: 22px 26px;
+    margin: 0 2px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 17px;
+    background-color: #0080A2;
+}
+
+.navbar a:first-child {
+    margin-right: 30px;
+}
+
+.navbar a:hover {
+    background-color: #005c75;
+}
+
+.navbar a.active {
+    background-color: #005c75;
+}
+
+.navbar .icon {
+    float: left;
+    display: flex;
+    font-size: large;
+    font-weight: 600;
+}
+
+.container {
+    margin: 20px 5%;
+    padding: 10px;
+    border: 1px solid darkgray;
+    background-color: lightgrey;
+    border-radius: 5px;
+    min-width: 300px;
+}
+
+.book-container {
+    display: inline-block;
+    width: 300px;
+    height: 300px;
+    background-color: plum;
+    border-radius: 8px;
+    margin: 0 8px;
+    border: 1px solid gray;
+}
+
+.book-img {
+    width: 95%;
+    height: 200px;
+    background-color: lightgray;
+}
+
+.book-name {
+    margin: 0;
+    font-size: 1.5rem;
+    text-overflow: ellipsis;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: 600;
+    padding: 0 10px;
+}
+
+.book-price {
+    margin: 0;
+    text-align: end;
+    font-size: 1.2em;
+}
+
+.primary {
+    background-color: #0080A2;
+    color: white;
+}
+
+.primary-dark {
+    background-color: #003058;
+    color: white;
+}
+
+.text-center {
+    text-align: center;
+}
+
+input[type="text"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+
+input[type="button"] {
+    padding: 10px 25px;
+    border-radius: 5px;
+    border: 1px solid #CCCCCC;
+    margin: 5px;
+}
+
+input[type="button"]:hover.primary {
+    background-color: #005c75;
+}
+
+footer {
+    position: relative;
+    margin: 0;
+    width: 100%;
+    bottom: 0;
+    padding: 20px 0;
+    margin-top: 40px;
+}
