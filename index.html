@@ -7,91 +7,89 @@
     <title>Pearson Bookstore | Home Page</title>
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
-    <div class="navbar">
-        <a href="#">Support</a>
-        <a href="#">About</a>
-        <a href="#">Shop</a>
-        <a href="#" class="active">Home</a>
-        <a href="#" class="icon">Pearson Bookstore</a>
+    <div class="navbar" id="myTopnav">
+        <a href="#">Pearson Bookstore</a>
+        <div class="nav-right">
+            <a href="#" class="active">Home</a>
+            <a href="#">Shop</a>
+            <a href="#">About</a>
+            <a href="#">Support</a>
+        </div>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
     </div>
     <div class="container">
         <div class="text-center">
-            <img src="assets/Pearson Bookstore Black.png" />
+            <h1 id="welcome-message">Welcome To </h1><img src="assets/Pearson Bookstore Black.png" />
         </div>
-        <br/>
+        <div class="separate-bar"></div>
         <h2>Featured Books</h2>
-        <div class="book-container">
-            <div class="text-center">
-                <img class="book-img" src="assets/Pearson Bookstore icon.png" />
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="book-container">
+                    <div class="text-center">
+                        <img src="assets/Pearson Bookstore Black.png" class="book-img" />
+                    </div>
+                    <h1 class="book-name">Book 1</h1>
+                    <h3 class="book-price">Price: R300</h3>
+                </div>
             </div>
-            <p class="book-name">Introduction to Programming</p>
-            <p class="book-price">Price: R300</p>
-        </div>
-        <div class="book-container">
-            <div class="text-center">
-                <img class="book-img" src="assets/Pearson Bookstore Black.png" />
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="book-container">
+                    <div class="text-center">
+                        <img src="assets/Pearson Bookstore Black.png" class="book-img" />
+                    </div>
+                    <h1 class="book-name">Book 2</h1>
+                </div>
             </div>
-            <p class="book-name">Introduction to Photoshop</p>
-            <p class="book-price">Price: R300</p>
-        </div>
-        <div class="book-container">
-            <div class="text-center">
-                <img class="book-img" src="assets/Pearson Bookstore icon.png" />
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="book-container">
+                    <div class="text-center">
+                        <img src="assets/Pearson Bookstore Black.png" class="book-img" />
+                    </div>
+                    <h1 class="book-name">Book 3</h1>
+                </div>
             </div>
-            <p class="book-name">Introduction to Java Programming</p>
-            <p class="book-price">Price: R300</p>
         </div>
+        <div class="separate-bar"></div>
         <h2>Programming Books</h2>
-        <div class="book-container">
-            <div class="text-center">
-                <img class="book-img" src="assets/Pearson Bookstore icon.png" />
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="book-container">
+                    <div class="text-center">
+                        <img src="assets/Pearson Bookstore icon.png" class="book-img" />
+                    </div>
+                    <h1 class="book-name">Book 1</h1>
+                    <h3 class="book-price">Price: R300</h3>
+                </div>
             </div>
-            <p class="book-name">Introduction to Programming</p>
-            <p class="book-price">Price: R300</p>
-        </div>
-        <div class="book-container">
-            <div class="text-center">
-                <img class="book-img" src="assets/Pearson Bookstore Black.png" />
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="book-container">
+                    <div class="text-center">
+                        <img src="assets/Pearson Bookstore icon.png" class="book-img" />
+                    </div>
+                    <h1 class="book-name">Book 2</h1>
+                </div>
             </div>
-            <p class="book-name">Introduction to Photoshop</p>
-            <p class="book-price">Price: R300</p>
-        </div>
-        <div class="book-container">
-            <div class="text-center">
-                <img class="book-img" src="assets/Pearson Bookstore icon.png" />
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="book-container">
+                    <div class="text-center">
+                        <img src="assets/Pearson Bookstore icon.png" class="book-img" />
+                    </div>
+                    <h1 class="book-name">Book 3</h1>
+                </div>
             </div>
-            <p class="book-name">Introduction to Java Programming</p>
-            <p class="book-price">Price: R300</p>
-        </div>
-        <h2>Photography Books</h2>
-        <div class="book-container">
-            <div class="text-center">
-                <img class="book-img" src="assets/Pearson Bookstore icon.png" />
-            </div>
-            <p class="book-name">Introduction to Programming</p>
-            <p class="book-price">Price: R300</p>
-        </div>
-        <div class="book-container">
-            <div class="text-center">
-                <img class="book-img" src="assets/Pearson Bookstore Black.png" />
-            </div>
-            <p class="book-name">Introduction to Photoshop</p>
-            <p class="book-price">Price: R300</p>
-        </div>
-        <div class="book-container">
-            <div class="text-center">
-                <img class="book-img" src="assets/Pearson Bookstore icon.png" />
-            </div>
-            <p class="book-name">Introduction to Java Programming</p>
-            <p class="book-price">Price: R300</p>
         </div>
     </div>
 </body>
 <footer class="primary">
     <p class="text-center">Footer</p>
 </footer>
+<script src="js/scripts.js"></script>
 
 </html>
