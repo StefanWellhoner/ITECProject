@@ -13,12 +13,12 @@
 
 <body>
     <div class="navbar" id="topnav">
-        <a href="index.html">Pearson Bookstore</a>
+        <a href="index.php">Pearson Bookstore</a>
         <div class="nav-right">
-            <a href="index.html">Home</a>
-            <a href="shop.html" class="active">Shop</a>
-            <a href="about.html">About</a>
-            <a href="support.html">Support</a>
+            <a href="index.php">Home</a>
+            <a href="shop.php" class="active">Shop</a>
+            <a href="about.php">About</a>
+            <a href="support.php">Support</a>
             <a onclick="cartDropdown()">
                 <span id="cart-text">Cart</span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
             </a>
@@ -40,43 +40,31 @@
                 <span class="item-price">R100</span>
                 <span class="item-quantity"> Quantity: 10</span>
             </li>
-            <li class="clearfix">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg" alt="item1" />
-                <span class="item-name">Introduction to Programming</span>
-                <span class="item-price">R100</span>
-                <span class="item-quantity"> Quantity: 10</span>
-            </li>
-            <li class="clearfix">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg" alt="item1" />
-                <span class="item-name">Introduction to Programming</span>
-                <span class="item-price">R100</span>
-                <span class="item-quantity"> Quantity: 10</span>
-            </li>
         </ul>
-        <a class="btn btn-100 primary">Checkout</a>
+        <a class="btn btn-100 primary" href="viewcart.php">Checkout</a>
     </div>
     <!-- Shopping cart end -->
     <div class="container">
         <section id="search">
-            <div class="row container">
-                <div class="form-group col-lg-5">
+            <div class="row">
+                <div class="form-group col-lg-4 col-md-12 col-sm-12">
                     <label for="searchBooks"><i class="fa fa-search" aria-hidden="true"></i></label>
                     <input id="searchBooks" class="form-control" type="search" placeholder="Search books">
                 </div>
-                <div class="form-group col-lg-3">
+                <div class="form-group col-lg-3 col-md-6 col-sm-6">
                     <select name="author" id="author" class="form-control">
                     <option value="null">Select an Author</option>
                     <option value="author1">Author 1</option>
                 </select>
                 </div>
-                <div class="form-group col-lg-3">
+                <div class="form-group col-lg-3 col-md-6 col-sm-6">
                     <select name="author" id="author" class="form-control">
                     <option value="null">Select a Category</option>
                     <option value="author1">Category 1</option>
                 </select>
                 </div>
-                <div class="form-group col-lg-1">
-                    <input type="button" class="btn primary" value="Search" />
+                <div class="col-lg-2 col-md-12 col-sm-12">
+                    <input type="button" class="btn-100 btn-blue" value="Search" />
                 </div>
             </div>
         </section>
@@ -88,7 +76,7 @@
                         <p>1 x Introduction to Programming</p>
                         <p>2 x Introduction to Photography</p>
                         <p>1 x Introduction to Java</p>
-                        <input type="button" value="Checkout" class="primary btn-100">
+                        <a class="btn primary btn-100" href="viewcart.php">Checkout</a>
                     </section>
                 </section>
             </div>
@@ -96,43 +84,43 @@
                 <section id="search-result">
                     <h2>Search Result: </h2>
                     <div class="row">
-                        <div class="col-lg-6 col-md-4 col-sm-6">
+                        <div class="col-lg-4 col-md-4 col-sm-6">
                             <div class="book-container">
                                 <img src="assets/Pearson Bookstore Black.png" class="book-img" />
                                 <p class="book-name">Introduction to Programming</p>
                                 <p class="book-price">R 300</p>
                                 <div class="text-center">
-                                    <input type="button" value="Add to Cart" class="secondary" />
+                                    <input type="button" value="Add to Cart" class="btn btn-green" />
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-4 col-sm-6">
+                        <div class="col-lg-4 col-md-4 col-sm-6">
                             <div class="book-container">
                                 <img src="assets/Pearson Bookstore Black.png" class="book-img" />
                                 <p class="book-name">Introduction to Programming</p>
                                 <p class="book-price">R 300</p>
                                 <div class="text-center">
-                                    <input type="button" value="Add to Cart" class="secondary" />
+                                    <input type="button" value="Add to Cart" class="btn btn-green" />
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-4 col-sm-6">
+                        <div class="col-lg-4 col-md-4 col-sm-6">
                             <div class="book-container">
                                 <img src="assets/Pearson Bookstore Black.png" class="book-img" />
                                 <p class="book-name">Introduction to Programming</p>
                                 <p class="book-price">R 300</p>
                                 <div class="text-center">
-                                    <input type="button" value="Add to Cart" class="secondary" />
+                                    <input type="button" value="Add to Cart" class="btn btn-green" />
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-4 col-sm-6">
+                        <div class="col-lg-4 col-md-4 col-sm-6">
                             <div class="book-container">
                                 <img src="assets/Pearson Bookstore Black.png" class="book-img" />
                                 <p class="book-name">Introduction to Programming</p>
                                 <p class="book-price">R 300</p>
                                 <div class="text-center">
-                                    <input type="button" value="Add to Cart" class="secondary" />
+                                    <input type="button" value="Add to Cart" class="btn btn-green" />
                                 </div>
                             </div>
                         </div>

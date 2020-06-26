@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pearson Bookstore | About</title>
+    <title>Pearson Bookstore | Support</title>
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -13,12 +13,12 @@
 
 <body>
     <div class="navbar" id="topnav">
-        <a href="index.html">Pearson Bookstore</a>
+        <a href="index.php">Pearson Bookstore</a>
         <div class="nav-right">
-            <a href="index.html">Home</a>
-            <a href="shop.html">Shop</a>
-            <a href="about.html" class="active">About</a>
-            <a href="support.html">Support</a>
+            <a href="index.php">Home</a>
+            <a href="shop.php">Shop</a>
+            <a href="about.php">About</a>
+            <a href="support.php" class="active">Support</a>
             <a onclick="cartDropdown()">
                 <span id="cart-text">Cart</span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
             </a>
@@ -40,18 +40,6 @@
                 <span class="item-price">R100</span>
                 <span class="item-quantity"> Quantity: 10</span>
             </li>
-            <li class="clearfix">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg" alt="item1" />
-                <span class="item-name">Introduction to Programming</span>
-                <span class="item-price">R100</span>
-                <span class="item-quantity"> Quantity: 10</span>
-            </li>
-            <li class="clearfix">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg" alt="item1" />
-                <span class="item-name">Introduction to Programming</span>
-                <span class="item-price">R100</span>
-                <span class="item-quantity"> Quantity: 10</span>
-            </li>
         </ul>
         <a class="btn btn-100 primary">Checkout</a>
     </div>
@@ -61,7 +49,7 @@
     </div>
 </body>
 <footer>
-    <p class="text-center">Footer</p>
+    <p class="text-center">Stefan Wellhoner &copy; 2020</p>
 </footer>
 <script src="js/scripts.js"></script>
 

@@ -4,6 +4,11 @@ body {
     font-family: 'Open Sans', serif;
 }
 
+img {
+    width: 100%;
+    height: auto;
+}
+
 *,
 *::before,
 *::after {
@@ -139,20 +144,87 @@ ul.shopping-cart-items {
 }
 
 .btn {
+    border: none;
     color: white;
+    padding: 12px 28px;
     text-align: center;
-    padding: 12px;
     text-decoration: none;
-    display: block;
-    border-radius: 3px;
+    display: inline-block;
     font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    transition-duration: 0.4s;
+}
+
+.btn-blue {
+    color: white;
+    background-color: #008CBA;
+    border: 2px solid #008CBA;
+}
+
+.btn-blue:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+}
+
+.btn-green {
+    color: white;
+    background-color: #4CAF50;
+    border: 2px solid #4CAF50;
+}
+
+.btn-green:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
+}
+
+.btn-red {
+    background-color: #f44336;
+}
+
+.btn-red:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid #f44336;
+}
+
+.btn-gray {
+    background-color: #e7e7e7;
+    color: black;
+}
+
+.btn-gray:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid #e7e7e7;
+}
+
+.btn-black {
+    background-color: #555555;
+}
+
+.btn-black:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid #555555;
+}
+
+.btn-sm {
+    font-size: 12px;
+    padding: 10px 24px;
 }
 
 .btn-lg {
-    padding: 15px 35px;
-    border-radius: 5px;
-    border: 1px solid transparent;
-    font-weight: 600;
+    font-size: 24px;
+    padding: 14px 40px;
+}
+
+.btn-100 {
+    width: 100%;
 }
 
 .badge {
@@ -170,35 +242,8 @@ ul.shopping-cart-items {
     white-space: nowrap;
 }
 
-.btn-100 {
-    width: 100%;
-}
-
-.primary {
-    background-color: #0080A2;
-    color: white;
-}
-
-.primary:hover {
-    background-color: #005c75;
-}
-
-.primary-dark {
-    background-color: #003058;
-    color: white;
-}
-
-.secondary {
-    background-color: #2AAD02;
-    color: white;
-}
-
-.secondary:hover {
-    background-color: #188F00;
-}
-
 .navbar {
-    background-color: #0080A2;
+    background-color: #008CBA;
     overflow: hidden;
 }
 
@@ -264,8 +309,9 @@ label {
     text-transform: uppercase;
     font-size: 17px;
     font-weight: 800;
-    background-color: #0080A2;
+    background-color: #008CBA;
     font-family: 'Playfair Display', serif;
+    transition-duration: 0.4s;
 }
 
 .nav-right {
@@ -353,7 +399,7 @@ input[type="search"] {
 input[type="button"] {
     padding: 10px 25px;
     border-radius: 5px;
-    border: 1px solid #CCCCCC;
+    transition-duration: 0.4s;
 }
 
 input[type="button"]:focus {
@@ -367,7 +413,7 @@ footer {
     bottom: 0;
     padding: 20px 0;
     margin-top: 40px;
-    background-color: #0080A2;
+    background-color: #008CBA;
     color: white;
 }
 
