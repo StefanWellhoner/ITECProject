@@ -8,86 +8,144 @@
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
 </head>
 
 <body>
-    <div class="navbar" id="myTopnav">
-        <a href="#">Pearson Bookstore</a>
+    <div class="navbar" id="topnav">
+        <a href="index.html">Pearson Bookstore</a>
         <div class="nav-right">
-            <a href="#" class="active">Home</a>
-            <a href="#">Shop</a>
-            <a href="#">About</a>
-            <a href="#">Support</a>
+            <a href="index.html" class="active">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="about.html">About</a>
+            <a href="support.html">Support</a>
+            <a href="javascript:void(0);" onclick="cartDropdown()">
+                <span id="cart-text">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">8</span>
+            </a>
         </div>
-        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <a href="javascript:void(0);" class="icon" onclick="collapse()">
             <i class="fa fa-bars"></i>
         </a>
+
     </div>
+    <!-- Shopping cart start -->
+    <div class="shopping-cart hide" id="modal-cart">
+        <div class="shopping-cart-header">
+            Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
+            <span class="shopping-cart-total">Total: <span class="money-text"> R 100</span></span>
+        </div>
+        <ul class="shopping-cart-items">
+            <li class="clearfix">
+                <img src="assets/Pearson Bookstore Black.png" alt="item1" />
+                <span class="item-name">Introduction to Programming</span>
+                <span class="item-price">R100</span>
+                <span class="item-quantity"> Quantity: 1</span>
+            </li>
+        </ul>
+        <a href="viewcart.html" class="btn btn-100 primary">Checkout</a>
+    </div>
+    <!-- Shopping cart end -->
     <div class="container">
         <div class="text-center">
-            <h1 id="welcome-message">Welcome To </h1><img src="assets/Pearson Bookstore Black.png" />
+            <h1 id="welcome-message">Welcome To </h1>
+            <img src="assets/Pearson Bookstore Black.png" style="max-width: 100%;" />
+        </div>
+        <div id="login-form">
+            <h2>Login</h2>
+            <form action="" method="post">
+                <div class="form-group">
+                    <label for="loginEmail">Email: </label>
+                    <input type="email" placeholder="Email" id="loginEmail" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password: </label>
+                    <input type="password" placeholder="Password" id="loginPassword" class="form-control" />
+                </div>
+                <input type="submit" value="Login" class="btn-lg btn-100 primary" />
+            </form>
         </div>
         <div class="separate-bar"></div>
-        <h2>Featured Books</h2>
+        <h2>Current Bestsellers</h2>
         <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="col-lg-3 col-md-6">
                 <div class="book-container">
-                    <div class="text-center">
-                        <img src="assets/Pearson Bookstore Black.png" class="book-img" />
+                    <img src="assets/Pearson Bookstore Black.png" class="book-img" />
+                    <div class="book-info-container">
+                        <p class="book-name">Introduction to Programming</p>
+                        <p class="book-price">R300</p>
                     </div>
-                    <h1 class="book-name">Book 1</h1>
-                    <h3 class="book-price">Price: R300</h3>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="col-lg-3 col-md-6">
                 <div class="book-container">
-                    <div class="text-center">
-                        <img src="assets/Pearson Bookstore Black.png" class="book-img" />
+                    <img src="assets/Pearson Bookstore Black.png" class="book-img" />
+                    <div class="book-info-container">
+                        <p class="book-name">Introduction to Programming</p>
+                        <p class="book-price">R300</p>
                     </div>
-                    <h1 class="book-name">Book 2</h1>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="col-lg-3 col-md-6">
                 <div class="book-container">
                     <div class="text-center">
                         <img src="assets/Pearson Bookstore Black.png" class="book-img" />
                     </div>
-                    <h1 class="book-name">Book 3</h1>
+                    <div class="book-info-container">
+                        <p class="book-name">Introduction to Programming</p>
+                        <p class="book-price">R300</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="book-container">
+                    <div class="text-center">
+                        <img src="assets/Pearson Bookstore Black.png" class="book-img" />
+                    </div>
+                    <div class="book-info-container">
+                        <p class="book-name">Introduction to Programming</p>
+                        <p class="book-price">R300</p>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="separate-bar"></div>
-        <h2>Programming Books</h2>
+        <h2>Top Rated Books</h2>
         <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="col-lg-4 col-md-6">
                 <div class="book-container">
-                    <div class="text-center">
-                        <img src="assets/Pearson Bookstore icon.png" class="book-img" />
+                    <img src="assets/Pearson Bookstore Black.png" class="book-img" />
+                    <div class="book-info-container">
+                        <p class="book-name">Introduction to Programming</p>
+                        <p class="book-price">R300</p>
                     </div>
-                    <h1 class="book-name">Book 1</h1>
-                    <h3 class="book-price">Price: R300</h3>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="col-lg-4 col-md-6">
                 <div class="book-container">
                     <div class="text-center">
-                        <img src="assets/Pearson Bookstore icon.png" class="book-img" />
+                        <img src="assets/Pearson Bookstore Black.png" class="book-img" />
                     </div>
-                    <h1 class="book-name">Book 2</h1>
+                    <div class="book-info-container">
+                        <p class="book-name">Introduction to Programming</p>
+                        <p class="book-price">R300</p>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="col-lg-4 col-md-6">
                 <div class="book-container">
                     <div class="text-center">
-                        <img src="assets/Pearson Bookstore icon.png" class="book-img" />
+                        <img src="assets/Pearson Bookstore Black.png" class="book-img" />
                     </div>
-                    <h1 class="book-name">Book 3</h1>
+                    <div class="book-info-container">
+                        <p class="book-name">Introduction to Programming</p>
+                        <p class="book-price">R300</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
-<footer class="primary">
+<footer>
     <p class="text-center">Footer</p>
 </footer>
 <script src="js/scripts.js"></script>
