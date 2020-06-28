@@ -45,7 +45,18 @@
     </div>
     <!-- Shopping cart end -->
     <div class="container">
-
+        <form id="support-form">
+            <h2>Support Form: </h2>
+            <div class="form-group">
+                <label for="supportEmail">Email: </label>
+                <input type="email" class="form-control" id="supportEmail" placeholder="Email"/>
+            </div>
+            <div class="form-group">
+                <label for="supportEmail">Message: </label>
+                <textarea rows="10" placeholder="Type your message here..."></textarea>
+            </div>
+            <input type="submit" class="btn btn-blue btn-100"/>
+        </form>
     </div>
 </body>
 <footer>

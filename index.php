@@ -1,8 +1,8 @@
+<?php
+include_once "conn.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
-<?php
-$randomCart = rand(1, 80);
-?>
 
 <head>
     <meta charset="UTF-8">
@@ -23,7 +23,7 @@ $randomCart = rand(1, 80);
             <a href="about.php">About</a>
             <a href="support.php">Support</a>
             <a href="javascript:void(0);" onclick="cartDropdown()">
-                <span id="cart-text">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge"><?php echo $randomCart ?></span>
+                <span id="cart-text">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
             </a>
         </div>
         <a href="javascript:void(0);" class="icon" onclick="collapse()">
@@ -34,25 +34,26 @@ $randomCart = rand(1, 80);
     <!-- Shopping cart start -->
     <div class="shopping-cart hide" id="modal-cart">
         <div class="shopping-cart-header">
-            Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge"><?php echo $randomCart ?></span>
-            <span class="shopping-cart-total">Total: <span class="money-text"> R 100</span></span>
+            Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
+            <span class="shopping-cart-total">Total: <span class="money-text">R 100</span></span>
         </div>
         <ul class="shopping-cart-items">
             <li class="clearfix">
                 <img src="assets/Pearson Bookstore Black.png" alt="item1" />
-                <span class="item-name">Introduction to Programming</span>
+                <span class="item-name" title="Introduction to Programming">Introduction to Programming</span>
                 <span class="item-price">R100</span>
-                <span class="item-quantity"> Quantity: 1</span>
+                <span class="item-quantity">Quantity: 1</span>
             </li>
         </ul>
-        <a href="viewcart.html" class="btn btn-sm btn-blue btn-100">Checkout</a>
+        <a href="viewcart.php" class="btn btn-sm btn-blue btn-100">Checkout</a>
     </div>
     <!-- Shopping cart end -->
     <div class="container">
         <div class="text-center">
-            <h1 id="welcome-message"><?php echo "Welcome To"; ?> </h1>
-            <img src="assets/Pearson Bookstore Black.png" />
+            <h1 id="welcome-message">Welcome To</h1>
+            <img src="assets/Pearson Bookstore Black.png" id="welcome-img" />
         </div>
+        <!-- Login form start -->
         <form action="" method="post" id="login-form">
             <h2>Login</h2>
             <div class="form-group">
@@ -64,39 +65,37 @@ $randomCart = rand(1, 80);
                 <input type="password" placeholder="Password" id="loginPassword" name="loginPassword" class="form-control" />
             </div>
             <input type="submit" value="Login" class="btn btn-blue btn-100" />
+            <a href="register.php" class="btn btn-green btn-100">Register</a>
         </form>
+        <!-- Login form end -->
         <div class="separate-bar"></div>
         <h2>Current Bestsellers</h2>
         <div class="row">
-            <div class="col-lg-3 col-md-4">
-                <div class="book-container">
-                    <img src="assets/Pearson Bookstore Black.png" class="book-img" />
-                    <div class="book-info-container">
-                        <p class="book-name">Introduction to Programming</p>
-                        <p class="book-price">R300</p>
+            <?php
+            $query = "SELECT * FROM `book`;";
+            if ($result = mysqli_query($conn, $query)) {
+                while ($row = mysqli_fetch_array($result)) {
+            ?>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="book-container">
+                            <img src="<?php echo $row["bookImage"]; ?>" class="book-img" />
+                            <div class="book-info-container">
+                                <div class="book-name" title="<?php echo $row["bookTitle"]; ?>">
+                                    <?php echo $row["bookTitle"]; ?>
+                                </div>
+                                <p class="book-price">
+                                    R <?php echo $row["bookPrice"]; ?>
+                                </p>
+                                <div class="text-center">
+                                    <input type="button" value="Add to Cart" class="btn btn-green" />
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4">
-                <div class="book-container">
-                    <img src="assets/Pearson Bookstore Black.png" class="book-img" />
-                    <div class="book-info-container">
-                        <p class="book-name">Introduction to Programming</p>
-                        <p class="book-price">R300</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4">
-                <div class="book-container">
-                    <div class="text-center">
-                        <img src="assets/Pearson Bookstore Black.png" class="book-img" />
-                    </div>
-                    <div class="book-info-container">
-                        <p class="book-name">Introduction to Programming</p>
-                        <p class="book-price">R300</p>
-                    </div>
-                </div>
-            </div>
+            <?php }
+            } ?>
+            <div class="separate-bar"></div>
         </div>
     </div>
 </body>

@@ -46,37 +46,35 @@
     <!-- Shopping cart end -->
     <div class="container">
         <section id="search">
-            <div class="row">
+            <form class="row">
                 <div class="form-group col-lg-4 col-md-12 col-sm-12">
                     <label for="searchBooks"><i class="fa fa-search" aria-hidden="true"></i></label>
                     <input id="searchBooks" class="form-control" type="search" placeholder="Search books">
                 </div>
                 <div class="form-group col-lg-3 col-md-6 col-sm-6">
                     <select name="author" id="author" class="form-control">
-                    <option value="null">Select an Author</option>
-                    <option value="author1">Author 1</option>
-                </select>
+                        <option value="null">Select an Author</option>
+                        <option value="author1">Author 1</option>
+                    </select>
                 </div>
                 <div class="form-group col-lg-3 col-md-6 col-sm-6">
                     <select name="author" id="author" class="form-control">
-                    <option value="null">Select a Category</option>
-                    <option value="author1">Category 1</option>
-                </select>
+                        <option value="null">Select a Category</option>
+                        <option value="author1">Category 1</option>
+                    </select>
                 </div>
                 <div class="col-lg-2 col-md-12 col-sm-12">
-                    <input type="button" class="btn-100 btn-blue" value="Search" />
+                    <input type="submit" class="btn btn-sm btn-100 btn-blue" value="Search" style="margin: 0;"/>
                 </div>
-            </div>
+            </form>
         </section>
         <div class="row">
             <div class="col-lg-3">
                 <section>
                     <h2>Your Cart: </h2>
                     <section id="cart">
-                        <p>1 x Introduction to Programming</p>
-                        <p>2 x Introduction to Photography</p>
-                        <p>1 x Introduction to Java</p>
-                        <a class="btn primary btn-100" href="viewcart.php">Checkout</a>
+                        <p>Your Shopping Cart is Empty</p>
+                        <a class="btn btn-blue btn-100" href="viewcart.php">Checkout</a>
                     </section>
                 </section>
             </div>
@@ -84,46 +82,21 @@
                 <section id="search-result">
                     <h2>Search Result: </h2>
                     <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-6">
-                            <div class="book-container">
-                                <img src="assets/Pearson Bookstore Black.png" class="book-img" />
-                                <p class="book-name">Introduction to Programming</p>
-                                <p class="book-price">R 300</p>
-                                <div class="text-center">
-                                    <input type="button" value="Add to Cart" class="btn btn-green" />
+                        <?php
+                        for ($i = 0; $i < 12; $i++) {
+                            $random = rand(1, 5);
+                        ?>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="book-container">
+                                    <img src="assets/book<?php echo $random ?>.png" class="book-img" />
+                                    <p class="book-name">Introduction to Programming</p>
+                                    <p class="book-price">R 300</p>
+                                    <div class="text-center">
+                                        <input type="button" value="Add to Cart" class="btn btn-green" />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6">
-                            <div class="book-container">
-                                <img src="assets/Pearson Bookstore Black.png" class="book-img" />
-                                <p class="book-name">Introduction to Programming</p>
-                                <p class="book-price">R 300</p>
-                                <div class="text-center">
-                                    <input type="button" value="Add to Cart" class="btn btn-green" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6">
-                            <div class="book-container">
-                                <img src="assets/Pearson Bookstore Black.png" class="book-img" />
-                                <p class="book-name">Introduction to Programming</p>
-                                <p class="book-price">R 300</p>
-                                <div class="text-center">
-                                    <input type="button" value="Add to Cart" class="btn btn-green" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6">
-                            <div class="book-container">
-                                <img src="assets/Pearson Bookstore Black.png" class="book-img" />
-                                <p class="book-name">Introduction to Programming</p>
-                                <p class="book-price">R 300</p>
-                                <div class="text-center">
-                                    <input type="button" value="Add to Cart" class="btn btn-green" />
-                                </div>
-                            </div>
-                        </div>
+                        <?php } ?>
                     </div>
                 </section>
             </div>
