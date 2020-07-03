@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once "includes/conn.inc.php";
 
 function querycompiler()
@@ -51,9 +52,15 @@ function querycompiler()
             <a href="shop.php" class="active">Shop</a>
             <a href="about.php">About</a>
             <a href="support.php">Support</a>
-            <a onclick="cartDropdown()">
-                <span id="cart-text">Cart</span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
-            </a>
+            <?php
+            if (isset($_SESSION['userID'])) : ?>
+                <a href="javascript:void(0);" onclick="cartDropdown()">
+                    <span id="cart-text">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
+                </a>
+
+                <a href="includes/logout.inc.php">Logout</a>
+            <?php endif; ?>
+
         </div>
         <a href="javascript:void(0);" class="icon" onclick="collapse()">
             <i class="fa fa-bars"></i>
@@ -84,7 +91,9 @@ function querycompiler()
             <form class="row">
                 <div class="form-group col-lg-4 col-md-12 col-sm-12">
                     <label for="searchBooks"><i class=" fa fa-search" aria-hidden="true"></i></label>
-                    <input autofocus tabindex="1" id="searchBooks" class="form-control" type="search" placeholder="Search books" name="search" value="<?php if (isset($_GET['search'])) {echo $_GET['search'];}?>">
+                    <input autofocus tabindex="1" id="searchBooks" class="form-control" type="search" placeholder="Search books" name="search" value="<?php if (isset($_GET['search'])) {
+                                                                                                                                                            echo $_GET['search'];
+                                                                                                                                                        } ?>">
                 </div>
                 <div class="form-group col-lg-3 col-md-6 col-sm-6">
                     <select tabindex="2" name="auth" id="auth" class="form-control">
@@ -112,7 +121,7 @@ function querycompiler()
                         <a class="btn btn-blue btn-100" href="viewcart.php">Checkout</a>
                     </section>
                 </section>
-            </div>      
+            </div>
             <div class="col-lg-9">
                 <section id="search-result">
                     <h2>Result For: "<?php if (isset($_GET['search'])) {
@@ -122,35 +131,31 @@ function querycompiler()
                         <?php
                         $query = querycompiler();
                         $result = $conn->query($query);
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
+                        if ($result->num_rows > 0) :
+                            while ($row = $result->fetch_assoc()) :
 
                         ?>
                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                     <div class="book-container">
-                                    <a href="viewbook.php?id=<?php echo $row["bookID"]; ?>">
-                                        <img src="<?php echo $row["bookImage"]; ?>" class="book-img" />
-                                        <div class="book-info-container">
-                                            
-                                                <div class="book-name" title="<?php echo $row["bookTitle"]; ?>"><?php echo $row["bookTitle"]; ?></div>
-                                            </a>
+                                        <a href="viewbook.php?id=<?php echo $row["bookID"]; ?>">
+                                            <img src="<?php echo $row["bookImage"]; ?>" class="book-img" />
+                                            <div class="book-info-container">
+                                            <div class="book-name" title="<?php echo $row["bookTitle"]; ?>"><?php echo $row["bookTitle"]; ?></div>                                
                                             <p class="book-price">R <?php echo $row["bookPrice"]; ?></p>
-                                            <div class="text-center">
-                                                <input type="button" value="Add to Cart" class="btn btn-green" />
-                                            </div>
-                                        </div>
-
+                                        </a>
                                     </div>
+
                                 </div>
-                        <?php     }
-                        } else {
-                            echo "<p class='col-lg-12'>No Search Results Found</p>";
-                        }
-                        ?>
                     </div>
-                </section>
+            <?php endwhile;
+                        else :
+                            echo "<p class='col-lg-12'>No Search Results Found</p>";
+                        endif;
+            ?>
             </div>
+            </section>
         </div>
+    </div>
     </div>
 </body>
 <footer>

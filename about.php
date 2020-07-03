@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,16 +15,22 @@
 </head>
 
 <body>
-    <div class="navbar" id="topnav">
+<div class="navbar" id="topnav">
         <a href="index.php">Pearson Bookstore</a>
         <div class="nav-right">
             <a href="index.php">Home</a>
             <a href="shop.php">Shop</a>
             <a href="about.php" class="active">About</a>
             <a href="support.php">Support</a>
-            <a onclick="cartDropdown()">
-                <span id="cart-text">Cart</span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
-            </a>
+            <?php
+            if (isset($_SESSION['userID'])) : ?>
+                <a href="javascript:void(0);" onclick="cartDropdown()">
+                    <span id="cart-text">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
+                </a>
+
+                <a href="includes/logout.inc.php">Logout</a>
+            <?php endif; ?>
+
         </div>
         <a href="javascript:void(0);" class="icon" onclick="collapse()">
             <i class="fa fa-bars"></i>
