@@ -16,3 +16,17 @@ function cartDropdown() {
         x.classList.toggle("hide");
     }
 }
+
+function myFunction(x) {
+    var y = document.getElementById("topnav");
+    var z = document.getElementById("modal-cart");
+    if (!x.matches) {
+        y.classList.remove("responsive");
+    } else {
+        z.classList.add("hide");
+    }
+}
+
+var x = window.matchMedia("(max-width: 992px)");
+myFunction(x);
+x.addListener(myFunction);

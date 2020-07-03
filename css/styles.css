@@ -9,6 +9,15 @@ img {
     height: auto;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.author-link {
+    color: rgb(71, 128, 233);
+}
+
 *,
 *::before,
 *::after {
@@ -267,7 +276,7 @@ ul.shopping-cart-items {
 }
 
 .navbar {
-    background-color: #008CBA;
+    background-color: #0277bd;
     overflow: hidden;
 }
 
@@ -333,7 +342,7 @@ label {
     text-transform: uppercase;
     font-size: 17px;
     font-weight: 800;
-    background-color: #008CBA;
+    background-color: #0277bd;
     font-family: 'Playfair Display', serif;
     transition-duration: 0.4s;
 }
@@ -347,11 +356,11 @@ label {
 }
 
 .navbar a:hover {
-    background-color: #005c75;
+    background-color: #004c8b;
 }
 
 .navbar .nav-right a.active {
-    background-color: #005c75;
+    background-color: #004c8b;
 }
 
 .navbar .icon {
@@ -403,6 +412,11 @@ label {
     text-align: center;
 }
 
+.custom-container {
+    margin: 0 auto;
+    padding: 0 20%;
+}
+
 select {
     padding: 8px 15px;
     border-radius: 8px;
@@ -417,6 +431,7 @@ select:focus {
 }
 
 input[type="search"],
+input[type="number"],
 textarea {
     padding: 10px;
     border-radius: 5px;

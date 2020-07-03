@@ -1,3 +1,35 @@
+<?php
+include_once "includes/conn.inc.php";
+
+function querycompiler()
+{
+    include "includes/conn.inc.php";
+    if (isset($_GET['search'])) {
+        $search = $conn->real_escape_string($_GET['search']);
+    }
+    if (isset($_GET['cat'])) {
+        $cat = $conn->real_escape_string($_GET['cat']);
+    }
+
+    $query = "SELECT * FROM book";
+    $conditions = array();
+
+    if (!empty($search)) {
+        $conditions[] = "bookTitle LIKE '%$search%'";
+    }
+    if (!empty($cat)) {
+        $conditions[] = "categoryID='$cat'";
+    }
+
+    $sql = $query;
+    if (count($conditions) > 0) {
+        $sql .= " WHERE " . implode(' AND ', $conditions);
+    }
+
+    return $sql;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,40 +63,43 @@
     <div class="shopping-cart hide" id="modal-cart">
         <div class="shopping-cart-header">
             Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
-            <span class="shopping-cart-total">Total: <span class="money-text"> R 3000</span></span>
+            <span class="shopping-cart-total">Total: <span class="money-text">R 100</span></span>
         </div>
         <ul class="shopping-cart-items">
             <li class="clearfix">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg" alt="item1" />
-                <span class="item-name">Introduction to Programming</span>
+                <img src="assets/Pearson Bookstore Black.png" alt="item1" />
+                <span class="item-name" title="Introduction to Programming">Introduction to Programming</span>
                 <span class="item-price">R100</span>
-                <span class="item-quantity"> Quantity: 10</span>
+                <span class="item-quantity">Quantity: 1</span>
             </li>
         </ul>
-        <a class="btn btn-100 primary" href="viewcart.php">Checkout</a>
+        <a href="viewcart.php" class="btn btn-sm btn-blue btn-100">Checkout</a>
     </div>
     <!-- Shopping cart end -->
     <div class="container">
+        <div class="header-message">
+            <h1>Shop</h1>
+        </div>
         <section id="search">
             <form class="row">
                 <div class="form-group col-lg-4 col-md-12 col-sm-12">
-                    <label for="searchBooks"><i class="fa fa-search" aria-hidden="true"></i></label>
-                    <input id="searchBooks" class="form-control" type="search" placeholder="Search books">
+                    <label for="searchBooks"><i class=" fa fa-search" aria-hidden="true"></i></label>
+                    <input autofocus tabindex="1" id="searchBooks" class="form-control" type="search" placeholder="Search books" name="search" value="<?php if (isset($_GET['search'])) {echo $_GET['search'];}?>">
                 </div>
                 <div class="form-group col-lg-3 col-md-6 col-sm-6">
-                    <select name="author" id="author" class="form-control">
-                        <option value="null">Select an Author</option>
+                    <select tabindex="2" name="auth" id="auth" class="form-control">
+                        <option value="">Select an Author</option>
                         <option value="author1">Author 1</option>
                     </select>
                 </div>
                 <div class="form-group col-lg-3 col-md-6 col-sm-6">
-                    <select name="author" id="author" class="form-control">
-                        <option value="null">Select a Category</option>
-                        <option value="author1">Category 1</option>
+                    <select tabindex="3" name="cat" id="auth" class="form-control">
+                        <option value="">Select a Category</option>
+                        <option value="1">Category 1</option>
                     </select>
                 </div>
                 <div class="col-lg-2 col-md-12 col-sm-12">
-                    <input type="submit" class="btn btn-sm btn-100 btn-blue" value="Search" style="margin: 0;"/>
+                    <input tabindex="4" type="submit" class="btn btn-sm btn-100 btn-blue" value="Search" style="margin: 0;" />
                 </div>
             </form>
         </section>
@@ -77,26 +112,41 @@
                         <a class="btn btn-blue btn-100" href="viewcart.php">Checkout</a>
                     </section>
                 </section>
-            </div>
+            </div>      
             <div class="col-lg-9">
                 <section id="search-result">
-                    <h2>Search Result: </h2>
+                    <h2>Result For: "<?php if (isset($_GET['search'])) {
+                                            echo $_GET["search"];
+                                        } ?>"</h2>
                     <div class="row">
                         <?php
-                        for ($i = 0; $i < 12; $i++) {
-                            $random = rand(1, 5);
+                        $query = querycompiler();
+                        $result = $conn->query($query);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+
                         ?>
-                            <div class="col-lg-4 col-md-4 col-sm-6">
-                                <div class="book-container">
-                                    <img src="assets/book<?php echo $random ?>.png" class="book-img" />
-                                    <p class="book-name">Introduction to Programming</p>
-                                    <p class="book-price">R 300</p>
-                                    <div class="text-center">
-                                        <input type="button" value="Add to Cart" class="btn btn-green" />
+                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                    <div class="book-container">
+                                    <a href="viewbook.php?id=<?php echo $row["bookID"]; ?>">
+                                        <img src="<?php echo $row["bookImage"]; ?>" class="book-img" />
+                                        <div class="book-info-container">
+                                            
+                                                <div class="book-name" title="<?php echo $row["bookTitle"]; ?>"><?php echo $row["bookTitle"]; ?></div>
+                                            </a>
+                                            <p class="book-price">R <?php echo $row["bookPrice"]; ?></p>
+                                            <div class="text-center">
+                                                <input type="button" value="Add to Cart" class="btn btn-green" />
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
-                            </div>
-                        <?php } ?>
+                        <?php     }
+                        } else {
+                            echo "<p class='col-lg-12'>No Search Results Found</p>";
+                        }
+                        ?>
                     </div>
                 </section>
             </div>

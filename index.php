@@ -1,5 +1,5 @@
 <?php
-include_once "conn.php";
+include_once "includes/conn.inc.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,6 +70,7 @@ include_once "conn.php";
         <!-- Login form end -->
         <div class="separate-bar"></div>
         <h2>Current Bestsellers</h2>
+
         <div class="row">
             <?php
             $query = "SELECT * FROM `book`;";
@@ -78,30 +79,30 @@ include_once "conn.php";
             ?>
                     <div class="col-lg-3 col-sm-6">
                         <div class="book-container">
-                            <img src="<?php echo $row["bookImage"]; ?>" class="book-img" />
-                            <div class="book-info-container">
-                                <div class="book-name" title="<?php echo $row["bookTitle"]; ?>">
-                                    <?php echo $row["bookTitle"]; ?>
-                                </div>
-                                <p class="book-price">
-                                    R <?php echo $row["bookPrice"]; ?>
-                                </p>
-                                <div class="text-center">
-                                    <input type="button" value="Add to Cart" class="btn btn-green" />
-                                </div>
+                            <a href="viewbook.php?id=<?php echo $row["bookID"]; ?>">
+                                <img src="<?php echo $row["bookImage"]; ?>" class="book-img" />
+                                <div class="book-info-container">
+                                    <div class="book-name" title="<?php echo $row["bookTitle"]; ?>">
+                                        <?php echo $row["bookTitle"]; ?>
+                                    </div>
+                            </a>
+                            <p class="book-price">
+                                R <?php echo $row["bookPrice"]; ?>
+                            </p>
+                            <div class="text-center">
+                                <input type="button" value="Add to Cart" class="btn btn-green" />
                             </div>
-
                         </div>
+
                     </div>
-            <?php }
-            } ?>
-            <div class="separate-bar"></div>
         </div>
+<?php } ?>
+           <?php } ?>
+<div class="separate-bar"></div>
+    </div>
     </div>
 </body>
-<footer>
-    <p class="text-center">Footer</p>
-</footer>
+<?php include "footer.php" ?>
 <script src="js/scripts.js"></script>
 
 </html>

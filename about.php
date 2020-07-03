@@ -45,12 +45,12 @@
     </div>
     <!-- Shopping cart end -->
     <div class="container">
-
+        <div class="header-message">
+            <h1>About</h1>
+        </div>
     </div>
 </body>
-<footer>
-    <p class="text-center">Footer</p>
-</footer>
+<?php include "footer.php" ?>
 <script src="js/scripts.js"></script>
 
 </html>
