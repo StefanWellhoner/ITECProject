@@ -15,7 +15,7 @@ session_start();
 </head>
 
 <body>
-    <div class="navbar" id="topnav">
+<div class="navbar" id="topnav">
         <a href="index.php">Pearson Bookstore</a>
         <div class="nav-right">
             <a href="index.php">Home</a>
@@ -24,17 +24,17 @@ session_start();
             <a href="support.php">Support</a>
             <?php
             if (isset($_SESSION['userID'])) : ?>
-                <a href="javascript:void(0);" onclick="cartDropdown()">
-                    <span id="cart-text">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
+                <a href="javascript:void(0);" onclick="cartDropdown()"  class="active">
+                    <span id="cart-text" class="hidden-sm">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
                 </a>
-
-                <a href="includes/logout.inc.php">Logout</a>
+                <a href="includes/logout.inc.php" title="Logout"><span class="hidden-sm">Logout </span><i class="fa fa-sign-out" aria-hidden="true"></i></a>
             <?php endif; ?>
 
         </div>
-        <a href="javascript:void(0);" class="icon" onclick="collapse()">
+        <a href="JavaScript:void(0)" class="icon" onclick="collapse()">
             <i class="fa fa-bars"></i>
         </a>
+
     </div>
     <div class="container">
         <div class="header-message">

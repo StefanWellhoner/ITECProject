@@ -1,5 +1,5 @@
 <?php
-    session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +15,7 @@
 </head>
 
 <body>
-<div class="navbar" id="topnav">
+    <div class="navbar" id="topnav">
         <a href="index.php">Pearson Bookstore</a>
         <div class="nav-right">
             <a href="index.php">Home</a>
@@ -25,16 +25,16 @@
             <?php
             if (isset($_SESSION['userID'])) : ?>
                 <a href="javascript:void(0);" onclick="cartDropdown()">
-                    <span id="cart-text">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
+                    <span id="cart-text" class="hidden-sm">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
                 </a>
-
-                <a href="includes/logout.inc.php">Logout</a>
+                <a href="includes/logout.inc.php" title="Logout"><span class="hidden-sm">Logout </span><i class="fa fa-sign-out" aria-hidden="true"></i></a>
             <?php endif; ?>
 
         </div>
-        <a href="javascript:void(0);" class="icon" onclick="collapse()">
+        <a href="JavaScript:void(0)" class="icon" onclick="collapse()">
             <i class="fa fa-bars"></i>
         </a>
+
     </div>
     <!-- Shopping cart start -->
     <div class="shopping-cart hide" id="modal-cart">
@@ -54,9 +54,25 @@
     </div>
     <!-- Shopping cart end -->
     <div class="container">
-        <div class="header-message">
-            <h1>About</h1>
+        <div class="separate-bar text-center">
+            <h2><img src="assets/Pearson Bookstore icon.png" style="height: auto; width: 50%; min-width: 400px;"></h2>
         </div>
+        <section id="about-us">
+            <h1>About Us</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil hic id at nesciunt velit ad atque placeat vitae voluptate non, doloremque, nostrum, illo libero iusto totam sapiente aperiam dolorum quasi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil hic id at nesciunt velit ad atque placeat vitae voluptate non, doloremque, nostrum, illo libero iusto totam sapiente aperiam dolorum quasi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil hic id at nesciunt velit ad atque placeat vitae voluptate non, doloremque, nostrum, illo libero iusto totam sapiente aperiam dolorum quasi.</p>
+        </section>
+        <section id="contact-info">
+            <p>Telephone: 0781726444</p>
+            <p>Email: support@peasonbookstore.co.za</p>
+            <span id="office-hours">
+                <p>Office Hours:</p>
+                <ul>
+                    <li>Monday - Friday: 7:00am to 5:00pm</li>
+                    <li>Satderday - Sunday: 8:00am to 2:00pm</li>
+                    <li>Public Holidays: Closed</li>
+                </ul>
+            </span>
+        </section>
     </div>
 </body>
 <?php include "footer.php" ?>

@@ -26,14 +26,13 @@ include_once "includes/conn.inc.php";
             <?php
             if (isset($_SESSION['userID'])) : ?>
                 <a href="javascript:void(0);" onclick="cartDropdown()">
-                    <span id="cart-text">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
+                    <span id="cart-text" class="hidden-sm">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
                 </a>
-
-                <a href="includes/logout.inc.php">Logout</a>
+                <a href="includes/logout.inc.php" title="Logout"><span class="hidden-sm">Logout </span><i class="fa fa-sign-out" aria-hidden="true"></i></a>
             <?php endif; ?>
 
         </div>
-        <a href="javascript:void(0);" class="icon" onclick="collapse()">
+        <a href="JavaScript:void(0)" class="icon" onclick="collapse()">
             <i class="fa fa-bars"></i>
         </a>
 
@@ -54,7 +53,7 @@ include_once "includes/conn.inc.php";
                     <span class="item-quantity">Quantity: 1</span>
                 </li>
             </ul>
-            <a href="viewcart.php" class="btn btn-sm btn-blue btn-100">Checkout</a>
+            <a href="viewcart.php" class="btn btn-sm btn-green btn-100">Checkout</a>
         </div>
         <!-- Shopping cart end -->
     <?php endif; ?>

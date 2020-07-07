@@ -55,16 +55,16 @@ function querycompiler()
             <?php
             if (isset($_SESSION['userID'])) : ?>
                 <a href="javascript:void(0);" onclick="cartDropdown()">
-                    <span id="cart-text">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
+                    <span id="cart-text" class="hidden-sm">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
                 </a>
-
-                <a href="includes/logout.inc.php">Logout</a>
+                <a href="includes/logout.inc.php" title="Logout"><span class="hidden-sm">Logout </span><i class="fa fa-sign-out" aria-hidden="true"></i></a>
             <?php endif; ?>
 
         </div>
-        <a href="javascript:void(0);" class="icon" onclick="collapse()">
+        <a href="JavaScript:void(0)" class="icon" onclick="collapse()">
             <i class="fa fa-bars"></i>
         </a>
+
     </div>
     <!-- Shopping cart start -->
     <div class="shopping-cart hide" id="modal-cart">
@@ -91,9 +91,7 @@ function querycompiler()
             <form class="row">
                 <div class="form-group col-lg-4 col-md-12 col-sm-12">
                     <label for="searchBooks"><i class=" fa fa-search" aria-hidden="true"></i></label>
-                    <input autofocus tabindex="1" id="searchBooks" class="form-control" type="search" placeholder="Search books" name="search" value="<?php if (isset($_GET['search'])) {
-                                                                                                                                                            echo $_GET['search'];
-                                                                                                                                                        } ?>">
+                    <input autofocus tabindex="1" id="searchBooks" class="form-control" type="search" placeholder="Search books" name="search" value="<?php if (isset($_GET['search'])) {echo $_GET['search'];} ?>">
                 </div>
                 <div class="form-group col-lg-3 col-md-6 col-sm-6">
                     <select tabindex="2" name="auth" id="auth" class="form-control">
@@ -117,8 +115,12 @@ function querycompiler()
                 <section>
                     <h2>Your Cart: </h2>
                     <section id="cart">
-                        <p>Your Shopping Cart is Empty</p>
-                        <a class="btn btn-blue btn-100" href="viewcart.php">Checkout</a>
+                        <?php if (isset($_SESSION['userID'])) : ?>
+                            <p>Your Shopping Cart is Empty</p>
+                            <a class="btn btn-blue btn-100" href="viewcart.php">Checkout</a>
+                        <?php else : ?>
+                            <p>Login to add to cart</p>
+                        <?php endif; ?>
                     </section>
                 </section>
             </div>
@@ -140,8 +142,8 @@ function querycompiler()
                                         <a href="viewbook.php?id=<?php echo $row["bookID"]; ?>">
                                             <img src="<?php echo $row["bookImage"]; ?>" class="book-img" />
                                             <div class="book-info-container">
-                                            <div class="book-name" title="<?php echo $row["bookTitle"]; ?>"><?php echo $row["bookTitle"]; ?></div>                                
-                                            <p class="book-price">R <?php echo $row["bookPrice"]; ?></p>
+                                                <div class="book-name" title="<?php echo $row["bookTitle"]; ?>"><?php echo $row["bookTitle"]; ?></div>
+                                                <p class="book-price">R <?php echo $row["bookPrice"]; ?></p>
                                         </a>
                                     </div>
 
@@ -156,7 +158,9 @@ function querycompiler()
             </section>
         </div>
     </div>
+    <a href="#topnav" class="fab" onclick="cartDropdown()"><i class="fa fa-shopping-cart" aria-hidden="true"></i><div class="badge">3</div></a>
     </div>
+
 </body>
 <footer>
     <p class="text-center">Footer</p>
