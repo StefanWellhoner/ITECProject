@@ -82,6 +82,20 @@ span#office-hours ul {
     color: white;
 }
 
+.error-msg {
+    padding: 3px 20px;
+    background-color: rgb(255, 171, 158);
+    border-radius: 8px;
+    color: rgb(90, 0, 0);
+}
+
+.success-msg {
+    padding: 3px 20px;
+    background-color: rgb(171, 255, 158);
+    border-radius: 8px;
+    color: rgb(0, 90, 0);
+}
+
 .book-info {
     color: #444444;
     margin: 5px 0;
@@ -152,7 +166,7 @@ span#office-hours ul {
 }
 
 .hide {
-    display: none;
+    display: none !important;
 }
 
 .shopping-cart {
@@ -318,6 +332,10 @@ ul.shopping-cart-items {
     width: 50%;
 }
 
+.btn-250 {
+    width: 250px;
+}
+
 .badge {
     font-family: "Open Sans";
     background-color: white;
@@ -377,8 +395,8 @@ label {
 
 .separate-bar {
     width: 100%;
-    padding: 10px 0;
-    margin: 20px 0;
+    padding: .75rem 0;
+    margin: 1rem 0;
     background: rgba(73, 155, 234, 0.63);
     background: -moz-linear-gradient(left, rgba(73, 155, 234, 0.63) 0%, rgba(246, 41, 12, 0.63) 0%, rgba(179, 20, 177, 0.63) 39%, rgba(152, 12, 245, 0.62) 55%, rgba(32, 124, 229, 0.61) 100%);
     background: -webkit-gradient(left top, right top, color-stop(0%, rgba(73, 155, 234, 0.63)), color-stop(0%, rgba(246, 41, 12, 0.63)), color-stop(39%, rgba(179, 20, 177, 0.63)), color-stop(55%, rgba(152, 12, 245, 0.62)), color-stop(100%, rgba(32, 124, 229, 0.61)));

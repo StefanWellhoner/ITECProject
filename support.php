@@ -1,5 +1,6 @@
 <?php
-    session_start();
+session_start();
+require 'includes/contact.inc.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,7 @@
 </head>
 
 <body>
-<div class="navbar" id="topnav">
+    <div class="navbar" id="topnav">
         <a href="index.php">Pearson Bookstore</a>
         <div class="nav-right">
             <a href="index.php">Home</a>
@@ -55,19 +56,27 @@
     <!-- Shopping cart end -->
     <div class="container">
         <div class="header-message">
-        <h1>Support Form</h1>
+            <h1>Support Form</h1>
         </div>
-        <form id="support-form">
-            
+        <?php if(isset($resultMsg) != ""): ?>
+        <div class="<?php echo $resultClass ?>">
+            <p><?php echo $resultMsg ?></p>
+        </div>
+        <?php endif; ?>
+        <form id="support-form" method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
             <div class="form-group">
-                <label for="supportEmail">Email: </label>
-                <input type="email" class="form-control" id="supportEmail" placeholder="Email"/>
+                <label for="name">Name: </label>
+                <input type="text" class="form-control" name="name" placeholder="Name" value="<?php echo isset($_POST['name']) ? $name : ''; ?>" />
             </div>
             <div class="form-group">
-                <label for="supportEmail">Message: </label>
-                <textarea rows="10" placeholder="Type your message here..."></textarea>
+                <label for="email">Email: </label>
+                <input type="email" class="form-control" name="email" placeholder="Email" value="<?php echo isset($_POST['email']) ? $email : ''; ?>"/>
             </div>
-            <input type="submit" class="btn btn-blue btn-100"/>
+            <div class="form-group">
+                <label for="message">Message: </label>
+                <textarea rows="10" name="message" placeholder="Type your message here..."><?php echo isset($_POST['message']) ? $message : ''; ?></textarea>
+            </div>
+            <button type="submit" name="submit" class="btn btn-blue btn-100">Send Message</button>
         </form>
     </div>
 </body>

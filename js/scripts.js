@@ -30,3 +30,14 @@ function windowBreakpoint(breakpoint992) {
         cartModal.classList.add("hide");
     }
 }
+
+function editProfile() {
+    document.getElementById('submit').classList.remove('hide');
+    document.getElementById('editprofile').classList.add('hide');
+
+}
+
+function saveChanges() {
+    document.getElementById('submit').classList.add('hide');
+    document.getElementById('editprofile').classList.remove('hide');
+}

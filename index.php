@@ -29,8 +29,8 @@ include_once "includes/conn.inc.php";
                     <span id="cart-text" class="hidden-sm">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
                 </a>
                 <a href="includes/logout.inc.php" title="Logout"><span class="hidden-sm">Logout </span><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                <a href="viewprofile.php" title="View Profile"><span class="hidden-sm">Profile </span><i class="fa fa-user" aria-hidden="true"></i></a>
             <?php endif; ?>
-
         </div>
         <a href="JavaScript:void(0)" class="icon" onclick="collapse()">
             <i class="fa fa-bars"></i>
@@ -59,7 +59,6 @@ include_once "includes/conn.inc.php";
     <?php endif; ?>
 
     <div class="container">
-
         <div class="text-center">
             <h1 id="welcome-message">Welcome To</h1>
             <img src="assets/Pearson Bookstore Black.png" id="welcome-img" />
@@ -83,29 +82,28 @@ include_once "includes/conn.inc.php";
         <?php endif; ?>
         <div class="separate-bar"></div>
         <h2>Current Bestsellers</h2>
-
         <div class="row">
             <?php
             $query = "SELECT * FROM `book` LIMIT 4;";
             if ($result = mysqli_query($conn, $query)) :
-                while ($row = mysqli_fetch_array($result)) :
-            ?>
+                while ($row = mysqli_fetch_array($result)) : ?>
                     <div class="col-lg-3 col-sm-6">
                         <div class="book-container">
                             <a href="viewbook.php?id=<?php echo $row["bookID"]; ?>">
                                 <img src="<?php echo $row["bookImage"]; ?>" class="book-img" />
                                 <div class="book-info-container">
-                                <div class="book-name" title="<?php echo $row["bookTitle"]; ?>"><?php echo $row["bookTitle"]; ?></div>
-                                <p class="book-price">R <?php echo $row["bookPrice"]; ?></p>
+                                    <div class="book-name" title="<?php echo $row["bookTitle"]; ?>">
+                                        <?php echo $row["bookTitle"]; ?>
+                                    </div>
+                                    <p class="book-price">R <?php echo $row["bookPrice"]; ?></p>
+                                </div>
                             </a>
                         </div>
                     </div>
+                <?php endwhile; ?>
+            <?php endif; ?>
         </div>
-    <?php endwhile; ?>
-<?php endif; ?>
-    </div>
-
-    <div class="separate-bar"></div>
+        <div class="separate-bar"></div>
     </div>
 </body>
 <?php include "footer.php" ?>
