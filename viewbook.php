@@ -13,6 +13,7 @@ include_once "includes/conn.inc.php";
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="./css/components.css">
 </head>
 
 <body>
@@ -55,29 +56,6 @@ include_once "includes/conn.inc.php";
   </div>
   <!-- Shopping cart end -->
   <div class="custom-container">
-    <!-- <section id="search">
-      <form class="row" action="shop.php">
-        <div class="form-group col-lg-4 col-md-12 col-sm-12">
-          <label for="searchBooks"><i class=" fa fa-search" aria-hidden="true"></i></label>
-          <input autofocus tabindex="1" id="searchBooks" class="form-control" type="search" placeholder="Search books" name="search">
-        </div>
-        <div class="form-group col-lg-3 col-md-6 col-sm-6">
-          <select tabindex="2" name="auth" id="auth" class="form-control">
-            <option value="">Select an Author</option>
-            <option value="author1">Author 1</option>
-          </select>
-        </div>
-        <div class="form-group col-lg-3 col-md-6 col-sm-6">
-          <select tabindex="3" name="cat" id="auth" class="form-control">
-            <option value="">Select a Category</option>
-            <option value="1">Category 1</option>
-          </select>
-        </div>
-        <div class="col-lg-2 col-md-12 col-sm-12">
-          <input tabindex="4" type="submit" class="btn btn-sm btn-100 btn-blue" value="Search" style="margin: 0;" />
-        </div>
-      </form>
-    </section> -->
     <div class="header-message">
       <h1>Shop</h1>
     </div>
@@ -85,6 +63,7 @@ include_once "includes/conn.inc.php";
       <?php
       $bookID = $_GET["id"];
       $query = "SELECT `book`.*, `category`.* FROM `book` INNER JOIN `category` ON `book`.categoryID = `category`.`categoryID` WHERE bookID = $bookID";
+      $authorQuery = "SELECT author.authorID, author.auth_firstname, author.auth_surname FROM `book_author` INNER JOIN `author` ON book_author.authorID = author.authorID WHERE book_author.bookID = $bookID;";
       $result = $conn->query($query);
       if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
@@ -95,21 +74,16 @@ include_once "includes/conn.inc.php";
             </div>
           </div>
           <div class="col-lg-8 col-md-8 col-sm-12 col-12">
-            <h2><?php echo $row['bookTitle'] ?></h2>
+            <h4><?php echo $row['bookTitle'] ?></h4>
             <p class="book-info">Edition: <?php echo $row["bookEdition"] ?></p>
             <p class="book-info">Total Pages: <?php echo $row["bookPage"] ?> pages</p>
             <p class="book-info">Release Date: <?php echo $row["bookReleaseDate"] ?></p>
-            <p class="book-info">Authors: <?php
-                                          $query2 = "SELECT author.authorID, author.auth_firstname, author.auth_surname
-                          FROM `book_author`
-                          INNER JOIN `author`
-                          ON book_author.authorID = author.authorID
-                          WHERE book_author.bookID = $bookID;";
-                                          $result1 = $conn->query($query2);
-                                          if ($result1->num_rows > 0) :
-                                            while ($row1 = $result1->fetch_assoc()) :
+            <p class="book-info">Authors: <?php                                          
+                                          $authorResult = $conn->query($authorQuery);
+                                          if ($authorResult->num_rows > 0) :
+                                            while ($row1 = $authorResult->fetch_assoc()) :
                                               echo "<a class='author-link' href='shop.php?search=" . $row1['authorID'] . "'>" . $row1['auth_firstname'] . " " . $row1['auth_surname'] . "</a>";
-                                              if ($row1['authorID'] != $result1->num_rows) :
+                                              if ($row1['authorID'] != $authorResult->num_rows) :
                                                 echo ", ";
                                               else :
                                                 echo "<br/>";

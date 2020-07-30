@@ -1,5 +1,25 @@
 <?php
 session_start();
+if (!isset($_SESSION['userID'])) {
+  header('Location: index.php');
+}
+include_once "includes/conn.inc.php";
+$resultMsg = "";
+if (isset($_POST['delete-submit'])) {
+  $userID = $_SESSION['userID'];
+  $locationID = $_POST['id'];
+  $sql = "DELETE FROM `location` WHERE userID = ? AND `locationID` = ?";
+  $stmt = mysqli_stmt_init($conn);
+  if (mysqli_stmt_prepare($stmt, $sql)) {
+    mysqli_stmt_bind_param($stmt, "ii", $userID, $locationID);
+    $result = mysqli_stmt_execute($stmt);
+    if ($result) {
+      $resultMsg = "Address Removed";
+    } else {
+      $resultMsg = "Failed to remove address";
+    }
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +33,7 @@ session_start();
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="./css/components.css">
 </head>
 
 <body>
@@ -79,17 +100,47 @@ session_start();
         </div>
       </div>
       <div class="text-center">
-        <button type="submit" name="submit" class="btn btn-green hide" id="submit" onclick="saveChanges()">Save Changes</button>
+        <button type="submit" name="submit" class="btn btn-green btn-sm btn-50 hide" id="submit" onclick="saveChanges()">Save Changes</button>
+        <a href="#" id="editprofile" class="btn btn-black btn-sm btn-50" onclick="editProfile()">Edit Profile</a>
+        <a href="#" class="btn btn-black btn-sm btn-50">Change Password</a>
       </div>
     </form>
-    <div class="text-center">
-      <a href="#" id="editprofile" class="btn btn-black btn-sm btn-50" onclick="editProfile()">Edit Profile</a>
-      <br>
-      <a href="#" class="btn btn-black btn-sm btn-50">Change Password</a>
-    </div>
+    <h4>Address <a href="address.php" style="font-size: 0.75em; color: #333;"><i class="fa fa-plus-circle"></i></a></h4>
+    <?php if ($resultMsg !== "") : ?>
+      <div class="success-msg" id="result-msg">
+        <?php echo $resultMsg; ?>
+      </div>
+    <?php endif; ?>
+    <?php
+    $userID = $_SESSION['userID'];
+    $query = "SELECT * FROM `location` WHERE userID = $userID;";
+    if ($result = mysqli_query($conn, $query)) :
+      while ($row = mysqli_fetch_array($result)) :
+    ?>
+        <div class="address-container">
+          <form action="<?php $_SERVER['PHP_SELF'] ?>" class="row" method="POST">
+            <input type="hidden" name="id" value="<?php echo $row['locationID'] ?>">
+            <p class="col-lg-11 col-10"><?php echo $row['address'] . ", " . $row['suburb'] . ", " . $row['province'] . ", " . $row['zipcode'] . ", ", $row['country'] ?></p>
+            <span class="col-lg-1 col-2">
+              <button class="delete-address" type="submit" name="delete-submit" title="Delete"><i class="fa fa-trash"></i></button>
+            </span>
+          </form>
+        </div>
+    <?php endwhile;
+    endif;
+    ?>
   </div>
 </body>
 <?php include "footer.php" ?>
 <script src="js/scripts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script>
+  //When the page has loaded.
+  $(document).ready(function() {
+    $('#result-msg').fadeIn('slow', function() {
+      $('#result-msg').delay(5000).fadeOut();
+    });
+  });
+</script>
 
 </html>

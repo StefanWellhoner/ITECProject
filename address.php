@@ -1,7 +1,6 @@
 <?php
 session_start();
-include_once "includes/conn.inc.php";
-include_once "includes/book_container.php";
+require 'includes/address.inc.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,19 +8,19 @@ include_once "includes/book_container.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pearson Bookstore | Home Page</title>
+    <title>Pearson Bookstore | Address</title>
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap-grid.min.css">
-    <link rel="stylesheet" href="./css/components.css">
+    <link rel="stylesheet" href="css/components.css">
 </head>
 
 <body>
     <div class="navbar" id="topnav">
         <a href="index.php">Pearson Bookstore</a>
         <div class="nav-right">
-            <a href="index.php" class="active">Home</a>
+            <a href="index.php">Home</a>
             <a href="shop.php">Shop</a>
             <a href="about.php">About</a>
             <a href="support.php">Support</a>
@@ -31,7 +30,7 @@ include_once "includes/book_container.php";
                     <span id="cart-text" class="hidden-sm">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
                 </a>
                 <a href="includes/logout.inc.php" title="Logout"><span class="hidden-sm">Logout </span><i class="fa fa-sign-out" aria-hidden="true"></i></a>
-                <a href="viewprofile.php" title="View Profile" id="user-profile"><span class="hidden-sm">Profile </span><i class="fa fa-user" aria-hidden="true"></i></a>
+                <a href="viewprofile.php" title="View Profile" id="user-profile" class="active"><span class="hidden-sm">Profile </span><i class="fa fa-user" aria-hidden="true"></i></a>
             <?php endif; ?>
         </div>
         <a href="JavaScript:void(0)" class="icon" onclick="collapse()">
@@ -61,38 +60,52 @@ include_once "includes/book_container.php";
     <?php endif; ?>
 
     <div class="container">
-        <div class="header-message text-center">
-            <h1>Welcome to <br> Pearson Bookstore</h1>
+        <div class="header-message">
+            <h1>Address</h1>
         </div>
-        <?php if (!isset($_SESSION['userID'])) : ?>
-            <!-- Login form start -->
-            <form action="includes/login.inc.php" method="post" id="login-form">
-                <h4 class="text-center">Login</h4>
-                <div class="form-group">
-                    <label for="loginEmail">Email: </label>
-                    <input type="email" placeholder="Email" name="email" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label for="loginPassword">Password: </label>
-                    <input type="password" placeholder="Password" name="password" class="form-control" />
-                </div>
-                <button type="submit" class="btn btn-blue btn-100" name="login-submit">Login</button>
-                <a href="register.php" class="btn btn-green btn-100">Register</a>
-            </form>
-            <!-- Login form end -->
+        <?php if (isset($_GET['address']) != "") : ?>
+            <div class="success-msg">
+                <p><?php echo $_GET['address'] ?></p>
+            </div>
         <?php endif; ?>
-        <h4>Current Bestsellers</h4>
-        <div class="row">
-            <?php
-            $query = "SELECT * FROM `book` LIMIT 4;";
-            if ($result = mysqli_query($conn, $query)) :
-                while ($row = mysqli_fetch_array($result)) : 
-                    echo component($row['bookID'], $row['bookTitle'], $row['bookImage'], $row['bookPrice']);
-                endwhile;
-            endif; ?>
-        </div>
+        <form action="includes/address.inc.php" method="POST">
+            <div class="form-group">
+                <label for="">Address line: </label>
+                <input type="text" placeholder="Address" name="address" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="">Suburb: </label>
+                <input type="text" placeholder="Suburb" name="suburb" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="country">Country: </label>
+                <select class="form-control" name="country">
+                    <option value="South Africa">South Africa</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="province">Province: </label>
+                <select class="form-control" name="province">
+                    <option value="Western Cape">Western Cape</option>
+                    <option value="Eastern Cape">Eastern Cape</option>
+                    <option value="Freestate">Freestate</option>
+                    <option value="Gauteng">Gauteng</option>
+                    <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+                    <option value="Limpopo">Limpopo</option>
+                    <option value="Northern Cape">Northern Cape</option>
+                    <option value="North West">North West</option>
+                    <option value="Mpumalanga">Mpumalanga</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="zipcode">Zipcode: </label>
+                <input type="number" placeholder="Zipcode" name="zipcode" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-blue btn-100" name="address-submit">Add Address</button>
+        </form>
     </div>
 </body>
 <?php include "footer.php" ?>
 <script src="js/scripts.js"></script>
+
 </html>

@@ -12,7 +12,8 @@ require 'includes/contact.inc.php';
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="./css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="./css/components.css">
 </head>
 
 <body>
@@ -23,12 +24,13 @@ require 'includes/contact.inc.php';
             <a href="shop.php">Shop</a>
             <a href="about.php">About</a>
             <a href="support.php" class="active">Support</a>
-            <?php
-            if (isset($_SESSION['userID'])) : ?>
+            <?php if (isset($_SESSION['userID'])) : ?>
                 <a href="javascript:void(0);" onclick="cartDropdown()">
-                    <span id="cart-text" class="hidden-sm">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
+                    <span class="hidden-sm">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
                 </a>
-                <a href="includes/logout.inc.php" title="Logout"><span class="hidden-sm">Logout </span><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                <a href="includes/logout.inc.php" title="Logout">
+                    <span class="hidden-sm">Logout </span> <i class="fa fa-sign-out" aria-hidden="true"></i>
+                </a>
             <?php endif; ?>
 
         </div>
@@ -58,19 +60,19 @@ require 'includes/contact.inc.php';
         <div class="header-message">
             <h1>Support Form</h1>
         </div>
-        <?php if(isset($resultMsg) != ""): ?>
-        <div class="<?php echo $resultClass ?>">
-            <p><?php echo $resultMsg ?></p>
-        </div>
+        <?php if (isset($resultMsg) != "") : ?>
+            <div class="<?php echo $resultClass ?>">
+                <p><?php echo $resultMsg ?></p>
+            </div>
         <?php endif; ?>
-        <form id="support-form" method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
+        <form id="support-form" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
             <div class="form-group">
                 <label for="name">Name: </label>
                 <input type="text" class="form-control" name="name" placeholder="Name" value="<?php echo isset($_POST['name']) ? $name : ''; ?>" />
             </div>
             <div class="form-group">
                 <label for="email">Email: </label>
-                <input type="email" class="form-control" name="email" placeholder="Email" value="<?php echo isset($_POST['email']) ? $email : ''; ?>"/>
+                <input type="email" class="form-control" name="email" placeholder="Email" value="<?php echo isset($_POST['email']) ? $email : ''; ?>" />
             </div>
             <div class="form-group">
                 <label for="message">Message: </label>

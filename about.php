@@ -12,6 +12,7 @@ session_start();
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="./css/components.css">
 </head>
 
 <body>
@@ -55,24 +56,18 @@ session_start();
     <!-- Shopping cart end -->
     <div class="container">
         <div class="separate-bar text-center">
-            <h2><img src="assets/Pearson Bookstore icon.png" style="height: auto; width: 50%; min-width: 400px;"></h2>
+            <h2><img src="assets/Pearson Bookstore icon.png" style="height: auto; width: 100%; max-width:100%;"></h2>
         </div>
-        <section id="about-us">
-            <h1>About Us</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil hic id at nesciunt velit ad atque placeat vitae voluptate non, doloremque, nostrum, illo libero iusto totam sapiente aperiam dolorum quasi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil hic id at nesciunt velit ad atque placeat vitae voluptate non, doloremque, nostrum, illo libero iusto totam sapiente aperiam dolorum quasi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil hic id at nesciunt velit ad atque placeat vitae voluptate non, doloremque, nostrum, illo libero iusto totam sapiente aperiam dolorum quasi.</p>
-        </section>
-        <section id="contact-info">
-            <p>Telephone: 0781726444</p>
-            <p>Email: support@peasonbookstore.co.za</p>
-            <span id="office-hours">
-                <p>Office Hours:</p>
-                <ul>
-                    <li>Monday - Friday: 7:00am to 5:00pm</li>
-                    <li>Satderday - Sunday: 8:00am to 2:00pm</li>
-                    <li>Public Holidays: Closed</li>
-                </ul>
-            </span>
-        </section>
+        <h4>About Us</h4>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil hic id at nesciunt velit ad atque placeat vitae voluptate non, doloremque, nostrum, illo libero iusto totam sapiente aperiam dolorum quasi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil hic id at nesciunt velit ad atque placeat vitae voluptate non, doloremque, nostrum, illo libero iusto totam sapiente aperiam dolorum quasi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil hic id at nesciunt velit ad atque placeat vitae voluptate non, doloremque, nostrum, illo libero iusto totam sapiente aperiam dolorum quasi.</p>
+        <p>Telephone: 0781726444</p>
+        <p>Email: support@peasonbookstore.co.za</p>
+        <p>Office Hours:</p>
+        <ul>
+            <li>Monday to Friday: 7:00am - 5:00pm</li>
+            <li>Satderday to Sunday: 8:00am - 2:00pm</li>
+            <li>Public Holidays: Closed</li>
+        </ul>
     </div>
 </body>
 <?php include "footer.php" ?>

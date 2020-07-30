@@ -32,12 +32,12 @@ function windowBreakpoint(breakpoint992) {
 }
 
 function editProfile() {
-    document.getElementById('submit').classList.remove('hide');
-    document.getElementById('editprofile').classList.add('hide');
+    document.getElementById('submit').classList.toggle('hide');
+    document.getElementById('editprofile').classList.toggle('hide');
 
 }
 
 function saveChanges() {
-    document.getElementById('submit').classList.add('hide');
-    document.getElementById('editprofile').classList.remove('hide');
+    document.getElementById('submit').classList.toggle('hide');
+    document.getElementById('editprofile').classList.toggle('hide');
 }

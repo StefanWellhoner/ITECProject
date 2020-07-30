@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once "includes/conn.inc.php";
+include_once "includes/book_container.php";
 
 function querycompiler()
 {
@@ -42,6 +43,7 @@ function querycompiler()
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="./css/components.css">
 </head>
 
 <body>
@@ -91,7 +93,7 @@ function querycompiler()
             <form class="row">
                 <div class="form-group col-lg-4 col-md-12 col-sm-12">
                     <label for="searchBooks"><i class=" fa fa-search" aria-hidden="true"></i></label>
-                    <input autofocus tabindex="1" id="searchBooks" class="form-control" type="search" placeholder="Search books" name="search" value="<?php if (isset($_GET['search'])) {echo $_GET['search'];} ?>">
+                    <input autofocus tabindex="1" id="searchBooks" class="form-control" type="search" placeholder="Search books" name="search" value="<?php echo (isset($_GET['search'])) ? $_GET['search'] : "" ?>">
                 </div>
                 <div class="form-group col-lg-3 col-md-6 col-sm-6">
                     <select tabindex="2" name="auth" id="auth" class="form-control">
@@ -113,58 +115,42 @@ function querycompiler()
         <div class="row">
             <div class="col-lg-3">
                 <section>
-                    <h2>Your Cart: </h2>
+                    <h4>Your Cart: </h4>
                     <section id="cart">
                         <?php if (isset($_SESSION['userID'])) : ?>
                             <p>Your Shopping Cart is Empty</p>
                             <a class="btn btn-blue btn-100" href="viewcart.php">Checkout</a>
                         <?php else : ?>
-                            <p>Login to add to cart</p>
+                            <p><a href="index.php" class="author-link">Login</a> to add to cart</p>
                         <?php endif; ?>
                     </section>
                 </section>
             </div>
             <div class="col-lg-9">
                 <section id="search-result">
-                    <h2>Result For: "<?php if (isset($_GET['search'])) {
-                                            echo $_GET["search"];
-                                        } ?>"</h2>
+                    <h4>Result For: "<?php echo isset($_GET['search']) ? $_GET["search"] : "" ?>"</h4>
                     <div class="row">
                         <?php
                         $query = querycompiler();
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) :
                             while ($row = $result->fetch_assoc()) :
-
-                        ?>
-                                <div class="col-lg-4 col-md-4 col-sm-6">
-                                    <div class="book-container">
-                                        <a href="viewbook.php?id=<?php echo $row["bookID"]; ?>">
-                                            <img src="<?php echo $row["bookImage"]; ?>" class="book-img" />
-                                            <div class="book-info-container">
-                                                <div class="book-name" title="<?php echo $row["bookTitle"]; ?>"><?php echo $row["bookTitle"]; ?></div>
-                                                <p class="book-price">R <?php echo $row["bookPrice"]; ?></p>
-                                        </a>
-                                    </div>
-
-                                </div>
-                    </div>
-            <?php endwhile;
+                                echo component($row['bookID'], $row['bookTitle'], $row['bookImage'], $row['bookPrice']);
+                            endwhile;
                         else :
                             echo "<p class='col-lg-12'>No Search Results Found</p>";
                         endif;
-            ?>
+                        ?>
+                    </div>
+                </section>
             </div>
-            </section>
         </div>
     </div>
-    <a href="#topnav" class="fab" onclick="cartDropdown()"><i class="fa fa-shopping-cart" aria-hidden="true"></i><div class="badge">3</div></a>
-    </div>
-
+    <a href="#topnav" class="fab" onclick="cartDropdown()"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+        <div class="badge">3</div>
+    </a>
 </body>
-<footer>
-    <p class="text-center">Footer</p>
-</footer>
+<?php include 'footer.php' ?>
 <script src="js/scripts.js"></script>
 
 </html>

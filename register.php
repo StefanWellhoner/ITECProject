@@ -15,6 +15,7 @@ if(isset($_SESSION['userID'])){
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="./css/components.css">
 </head>
 
 <body>
@@ -53,7 +54,7 @@ if(isset($_SESSION['userID'])){
       <h1>Register</h1>
     </div>
     <form action="includes/register.inc.php" method="POST" id="register-form" class="row">
-      <h3 class="col-lg-12">Login Information</h3>
+      <h4 class="col-lg-12">Login Information</h4>
       <div class="form-group col-md-12">
         <label for="regEmail">Email: </label>
         <input type="email" placeholder="Email" name="email" class="form-control" />
@@ -66,7 +67,7 @@ if(isset($_SESSION['userID'])){
         <label for="regCPassword">Confirm Password: </label>
         <input type="password" placeholder="Confirm Password" name="confirm_password" class="form-control" />
       </div>
-      <h3 class="col-lg-12">Personal Information</h3>
+      <h4 class="col-lg-12">Personal Information</h4>
       <div class="form-group col-md-6">
         <label for="regFirst">Firstname: </label>
         <input type="text" placeholder="Firstname" name="firstName" class="form-control" />
@@ -82,40 +83,6 @@ if(isset($_SESSION['userID'])){
       <div class="form-group col-md-6">
         <label for="regDOB">Date Of Birth: </label>
         <input type="date" placeholder="Date Of Birth" name="dateOfBirth" class="form-control" />
-      </div>
-      <h3 class="col-lg-12">Shipping Information</h3>
-      <div class="form-group col-md-12">
-        <label for="regAddress">Address: </label>
-        <textarea type="text" placeholder="Address" name="address" rows="5"></textarea>
-      </div>
-      <div class="form-group col-md-12">
-        <label for="regProvince">Country: </label>
-        <select class="form-control" name="country">
-          <option value="null">Select a Country</option>
-          <option value="ZA">South Africa</option>
-        </select>
-      </div>
-      <div class="form-group col-md-4">
-        <label for="regProvince">Province: </label>
-        <select class="form-control" name="province">
-          <option value="null">Select a Province</option>
-          <option value="Eastern Cape">Eastern Cape</option>
-          <option value="Western Cape">Western Cape</option>
-          <option value="Northern Cape">Northern Cape</option>
-          <option value="North West">North West</option>
-          <option value="Gauteng">Gauteng</option>
-          <option value="Limpopo">Limpopo</option>
-          <option value="KwaZulu-Natal">KwaZulu-Natal</option>
-          <option value="Mpumalanga">Mpumalanga</option>
-        </select>
-      </div>
-      <div class="form-group col-md-4">
-        <label for="regSuburb">Suburb: </label>
-        <input type="text" placeholder="Suburb" name="suburb" class="form-control" />
-      </div>
-      <div class="form-group col-md-4">
-        <label for="regZip">Zip Code: </label>
-        <input type="number" placeholder="Zip Code" name="zipcode" class="form-control" />
       </div>
       <div class="col-lg-12">
         <button type="submit" class="btn btn-green btn-100" name="register-submit">Register</button>
