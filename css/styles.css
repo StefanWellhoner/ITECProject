@@ -14,6 +14,11 @@ a {
   color: black;
 }
 
+ul, ul>li{
+  padding: 0px;
+  list-style: none;
+}
+
 .author-link {
   color: rgb(71, 128, 233);
 }
@@ -31,14 +36,14 @@ a {
 }
 
 .error-msg {
-  padding: 3px 20px;
+  padding: .75rem 20px;
   background-color: rgb(255, 171, 158);
   border-radius: 8px;
   color: rgb(90, 0, 0);
 }
 
 .success-msg {
-  padding: 3px 20px;
+  padding: .75rem 20px;
   background-color: rgb(171, 255, 158);
   border-radius: 8px;
   color: rgb(0, 90, 0);
@@ -51,6 +56,15 @@ a {
   font-size: 0.9rem;
 }
 
+.bold{
+  font-weight: 600;
+}
+.underlined{
+  text-decoration: underline;
+}
+.text-justify{
+  text-align: justify;
+}
 #support-form {
   margin-top: 30px;
 }
@@ -274,9 +288,6 @@ label {
   background-color: white;
   color: #ff3737;
   border: 2px solid #f44336;
-}
-#user-profile {
-  border-radius: 50%;
 }
 
 @media screen and (max-width: 992px) {

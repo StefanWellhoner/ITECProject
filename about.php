@@ -9,65 +9,74 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pearson Bookstore | About</title>
     <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap-grid.min.css">
     <link rel="stylesheet" href="./css/components.css">
 </head>
 
 <body>
-    <div class="navbar" id="topnav">
+    <nav class="navbar" id="topnav">
         <a href="index.php">Pearson Bookstore</a>
         <div class="nav-right">
             <a href="index.php">Home</a>
             <a href="shop.php">Shop</a>
             <a href="about.php" class="active">About</a>
             <a href="support.php">Support</a>
-            <?php
-            if (isset($_SESSION['userID'])) : ?>
+            <?php if (!isset($_SESSION['userID'])) : ?>
+                <a href="login.php">Login</a>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['userID'])) : ?>
                 <a href="javascript:void(0);" onclick="cartDropdown()">
                     <span id="cart-text" class="hidden-sm">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
                 </a>
+                <a href="viewprofile.php" title="View Profile" id="user-profile"><span class="hidden-sm">Profile </span><i class="fa fa-user" aria-hidden="true"></i></a>
                 <a href="includes/logout.inc.php" title="Logout"><span class="hidden-sm">Logout </span><i class="fa fa-sign-out" aria-hidden="true"></i></a>
             <?php endif; ?>
-
         </div>
         <a href="JavaScript:void(0)" class="icon" onclick="collapse()">
             <i class="fa fa-bars"></i>
         </a>
-
-    </div>
-    <!-- Shopping cart start -->
-    <div class="shopping-cart hide" id="modal-cart">
-        <div class="shopping-cart-header">
-            Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
-            <span class="shopping-cart-total">Total: <span class="money-text"> R 3000</span></span>
+    </nav>
+    <?php if (isset($_SESSION['userID'])) : ?>
+        <!-- Shopping cart start -->
+        <div class="shopping-cart hide" id="modal-cart">
+            <div class="shopping-cart-header">
+                Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
+                <span class="shopping-cart-total">Total: <span class="money-text">R 100</span></span>
+            </div>
+            <ul class="shopping-cart-items">
+                <li class="clearfix">
+                    <img src="assets/Pearson Bookstore Black.png" alt="item1" />
+                    <span class="item-name" title="Introduction to Programming">Introduction to Programming</span>
+                    <span class="item-price">R100</span>
+                    <span class="item-quantity">Quantity: 1</span>
+                </li>
+            </ul>
+            <a href="viewcart.php" class="btn btn-sm btn-green btn-100">Checkout</a>
         </div>
-        <ul class="shopping-cart-items">
-            <li class="clearfix">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg" alt="item1" />
-                <span class="item-name">Introduction to Programming</span>
-                <span class="item-price">R100</span>
-                <span class="item-quantity"> Quantity: 10</span>
-            </li>
-        </ul>
-        <a class="btn btn-100 primary">Checkout</a>
-    </div>
-    <!-- Shopping cart end -->
+        <!-- Shopping cart end -->
+    <?php endif; ?>
     <div class="container">
         <div class="separate-bar text-center">
-            <h2><img src="assets/Pearson Bookstore icon.png" style="height: auto; width: 100%; max-width:100%;"></h2>
+            <img src="assets/Pearson Bookstore icon.png" style="height: auto; width: 100%; max-width:510px;">
         </div>
-        <h4>About Us</h4>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil hic id at nesciunt velit ad atque placeat vitae voluptate non, doloremque, nostrum, illo libero iusto totam sapiente aperiam dolorum quasi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil hic id at nesciunt velit ad atque placeat vitae voluptate non, doloremque, nostrum, illo libero iusto totam sapiente aperiam dolorum quasi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil hic id at nesciunt velit ad atque placeat vitae voluptate non, doloremque, nostrum, illo libero iusto totam sapiente aperiam dolorum quasi.</p>
-        <p>Telephone: 0781726444</p>
-        <p>Email: support@peasonbookstore.co.za</p>
-        <p>Office Hours:</p>
-        <ul>
-            <li>Monday to Friday: 7:00am - 5:00pm</li>
-            <li>Satderday to Sunday: 8:00am - 2:00pm</li>
-            <li>Public Holidays: Closed</li>
-        </ul>
+        <div class="row">
+            <div id="about-us" class="col-12 col-md-6">
+                <h4>About Us</h4>
+                <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil hic id at nesciunt velit ad atque placeat vitae voluptate non, doloremque, nostrum, illo libero iusto totam sapiente aperiam dolorum quasi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil hic id at nesciunt velit ad atque placeat vitae voluptate non, doloremque, nostrum, illo libero iusto totam sapiente aperiam dolorum quasi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil hic id at nesciunt velit ad atque placeat vitae voluptate non, doloremque, nostrum, illo libero iusto totam sapiente aperiam dolorum quasi.</p>
+            </div>
+            <div id="operating-hours" class="col-12 col-md-6">
+                <h4>Contact Us</h4>
+                <p><span class="bold">Telephone:</span> 0781726444<br><span class="bold">Email:</span> support@peasonbookstore.co.za</p>
+                <span class="bold">Operating Hours:</span>
+                <ul>
+                    <li>Monday to Friday: 7:00am - 5:00pm</li>
+                    <li>Satderday to Sunday: 8:00am - 2:00pm</li>
+                    <li>Public Holidays: Closed</li>
+                </ul>
+            </div>
+        </div>
     </div>
 </body>
 <?php include "footer.php" ?>

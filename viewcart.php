@@ -13,10 +13,39 @@ if (!isset($_SESSION['userID'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pearson Bookstore | View Cart</title>
     <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap-grid.min.css">
     <link rel="stylesheet" href="./css/components.css">
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid #DDD;
+            border-top: 1px solid #DDD;
+        }
+
+        tr:nth-child(even) {
+            background-color: #FFF;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #EFEFEF;
+        }
+
+        tr:last-child>td{
+            text-align: right;
+        }
+
+        td>a {
+            color: rgb(71, 128, 233);
+        }
+    </style>
 </head>
 
 <body>
@@ -36,41 +65,38 @@ if (!isset($_SESSION['userID'])) {
                     <span class="hidden-sm">Logout </span><i class="fa fa-sign-out" aria-hidden="true"></i>
                 </a>
             <?php endif; ?>
-
         </div>
         <a href="JavaScript:void(0)" class="icon" onclick="collapse()">
             <i class="fa fa-bars"></i>
         </a>
-
     </div>
+
     <div class="container">
         <div class="header-message">
             <h1>View Cart</h1>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <?php
-                $userID = $_SESSION['userID'];
-                $sql = "SELECT book.bookID, book.bookTitle, book.bookPrice, book.bookImage, cart_item.cartID, cart_item.item_quantity, cart.cartID, cart.cartTotal
-             FROM book
-             INNER JOIN cart_item
-             ON book.bookID = cart_item.bookID
-             INNER JOIN cart
-             ON cart_item.cartID = cart.cartID
-             WHERE cart.userID = $userID";
-             $counter = 0;
-                if ($result = mysqli_query($conn, $sql)) :
-                    while ($row = mysqli_fetch_array($result)) :
-                        echo ++$counter."<br>"; 
-                        echo "Title: " . $row['bookTitle'] . "<br>";
-                        echo "Price: " . $row['bookPrice'] . "<br>";
-                        echo "Quantity: " . $row['item_quantity'] . "<br>";
-                        echo "Total: " . ($row['item_quantity'] * $row['bookPrice']) . "<br><br>";
-                    endwhile;
-                endif;
-                ?>
-            </div>
-        </div>
+        <table style="width: 100%;">
+            <tr>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+            <?php
+            $total = 0;
+            for ($i = 0; $i < count($_SESSION['cart']); $i++) {
+                $cartItem = $_SESSION['cart'][$i];
+                echo '<tr>';
+                echo '<td><a href=viewbook.php?id=' . $cartItem['bookID'] . '>' . $cartItem["bookTitle"] . '</a></td>';
+                echo '<td>R ' . $cartItem["bookPrice"] . '</td>';
+                echo '<td>' . $cartItem["quantity"] . '</td>';
+                echo '<td>R ' . ($cartItem["quantity"] * $cartItem['bookPrice']) . '</td>';
+                echo '</tr>';
+                $total += ($cartItem["quantity"] * $cartItem['bookPrice']);
+            }
+            echo '<tr><td colspan="4">Grand Total: '.$total.'</td></tr>';
+            ?>
+        </table>
     </div>
 </body>
 <?php include "footer.php" ?>

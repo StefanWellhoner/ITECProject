@@ -14,7 +14,7 @@ if (isset($_POST['delete-submit'])) {
     mysqli_stmt_bind_param($stmt, "ii", $userID, $locationID);
     $result = mysqli_stmt_execute($stmt);
     if ($result) {
-      $resultMsg = "Address Removed";
+      echo '<script>window.location = "viewprofile.php"</script>';
     } else {
       $resultMsg = "Failed to remove address";
     }
@@ -30,7 +30,7 @@ if (isset($_POST['delete-submit'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pearson Bookstore | View Profile</title>
   <link rel="stylesheet" href="css/styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/bootstrap-grid.min.css">
   <link rel="stylesheet" href="./css/components.css">
@@ -66,41 +66,56 @@ if (isset($_POST['delete-submit'])) {
     <div class="header-message">
       <h1>View Profile</h1>
     </div>
+    <?php
+    if (isset($_GET["error"])) {
+      if ($_GET["error"] == "emptyfields") {
+        echo '<p class="error-msg">Fill in all fields!</p>';
+      } else if ($_GET["error"] == "invalidname") {
+        echo '<p class="error-msg">Invalid Name</p>';
+      } else if ($_GET["error"] == "invalidlast") {
+        echo '<p class="error-msg">Invalid Last Name</p>';
+      } else if ($_GET["error"] == "invalidnum") {
+        echo '<p class="error-msg">Invalid Number</p>';
+      }
+    } else if (isset($_GET['update'])) {
+      echo '<p class="success-msg" id="message">Updated Successful</p>';
+    }
+    ?>
     <form action="includes/update_profile.inc.php" method="POST">
       <div class="row">
         <div class="col-lg-12">
           <div class="form-group">
             <label for="">Email: </label>
-            <input type="email" name="email" disabled value="<?php echo $_SESSION['email'] ?>" class="form-control">
+            <input type="email" name="email" value="<?php echo $_SESSION['email'] ?>" class="form-control">
           </div>
         </div>
         <div class="col-lg-6">
           <div class="form-group">
             <label for="">Firstname: </label>
-            <input type="text" name="firstname" disabled value="<?php echo $_SESSION['firstname'] ?>" class="form-control">
+            <input type="text" name="firstname" value="<?php echo $_SESSION['firstname'] ?>" class="form-control">
           </div>
         </div>
         <div class="col-lg-6">
           <div class="form-group">
             <label for="">Lastname: </label>
-            <input type="text" name="lastname" disabled value="<?php echo $_SESSION['lastname'] ?>" class="form-control">
+            <input type="text" name="lastname" value="<?php echo $_SESSION['lastname'] ?>" class="form-control">
           </div>
         </div>
         <div class="col-lg-6">
           <div class="form-group">
             <label for="">Phone Number: </label>
-            <input type="text" name="number" disabled value="<?php echo $_SESSION['phoneNumber'] ?>" class="form-control">
+            <input type="text" name="number" value="<?php echo $_SESSION['phoneNumber'] ?>" class="form-control">
           </div>
         </div>
         <div class="col-lg-6">
           <div class="form-group">
             <label for="">Date of Birth: </label>
-            <input type="date" name="dob" disabled value="<?php echo $_SESSION['dateOfBirth'] ?>" class="form-control">
+            <input type="date" name="dob" value="<?php echo $_SESSION['dateOfBirth'] ?>" class="form-control">
           </div>
         </div>
       </div>
       <div class="text-center">
-        <button type="submit" name="submit" class="btn btn-green btn-sm btn-50 hide" id="submit" onclick="saveChanges()">Save Changes</button>
+        <button type="submit" name="submit-update" class="btn btn-green btn-sm btn-50 hide" id="submit" onclick="saveChanges()">Save Changes</button>
         <a href="#" id="editprofile" class="btn btn-black btn-sm btn-50" onclick="editProfile()">Edit Profile</a>
         <a href="#" class="btn btn-black btn-sm btn-50">Change Password</a>
       </div>
@@ -138,7 +153,12 @@ if (isset($_POST['delete-submit'])) {
   //When the page has loaded.
   $(document).ready(function() {
     $('#result-msg').fadeIn('slow', function() {
-      $('#result-msg').delay(5000).fadeOut();
+      $('#result-msg').delay(3000).fadeOut();
+    });
+  });
+  $(document).ready(function() {
+    $('#message').fadeIn('slow', function() {
+      $('#message').delay(3000).fadeOut();
     });
   });
 </script>

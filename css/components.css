@@ -107,7 +107,7 @@
   color: white;
   font-size: 34px;
   font-weight: 800;
-  background-color: #4caf50;
+  background-color: #009220;
   position: fixed;
   z-index: 800;
   right: 2rem;
@@ -221,7 +221,7 @@ input[type="button"]:focus {
   float: left;
   display: block;
   color: white;
-  padding: 22px 26px;
+  padding: 22px 24px;
   margin: 0 1px;
   text-align: center;
   text-decoration: none;
@@ -303,7 +303,7 @@ input[type="button"]:focus {
 
 .shopping-cart:after {
   bottom: 100%;
-  left: 55%;
+  left: 57%;
   border: solid transparent;
   content: " ";
   height: 0;

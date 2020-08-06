@@ -10,35 +10,35 @@ require 'includes/contact.inc.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pearson Bookstore | Support</title>
     <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/bootstrap-grid.min.css">
     <link rel="stylesheet" href="./css/components.css">
 </head>
 
 <body>
-    <div class="navbar" id="topnav">
+    <nav class="navbar" id="topnav">
         <a href="index.php">Pearson Bookstore</a>
         <div class="nav-right">
             <a href="index.php">Home</a>
             <a href="shop.php">Shop</a>
             <a href="about.php">About</a>
             <a href="support.php" class="active">Support</a>
+            <?php if (!isset($_SESSION['userID'])) : ?>
+                <a href="login.php">Login</a>
+            <?php endif; ?>
             <?php if (isset($_SESSION['userID'])) : ?>
                 <a href="javascript:void(0);" onclick="cartDropdown()">
-                    <span class="hidden-sm">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
+                    <span id="cart-text" class="hidden-sm">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
                 </a>
-                <a href="includes/logout.inc.php" title="Logout">
-                    <span class="hidden-sm">Logout </span> <i class="fa fa-sign-out" aria-hidden="true"></i>
-                </a>
+                <a href="viewprofile.php" title="View Profile" id="user-profile"><span class="hidden-sm">Profile </span><i class="fa fa-user" aria-hidden="true"></i></a>
+                <a href="includes/logout.inc.php" title="Logout"><span class="hidden-sm">Logout </span><i class="fa fa-sign-out" aria-hidden="true"></i></a>
             <?php endif; ?>
-
         </div>
         <a href="JavaScript:void(0)" class="icon" onclick="collapse()">
             <i class="fa fa-bars"></i>
         </a>
-
-    </div>
+    </nav>
     <!-- Shopping cart start -->
     <div class="shopping-cart hide" id="modal-cart">
         <div class="shopping-cart-header">
