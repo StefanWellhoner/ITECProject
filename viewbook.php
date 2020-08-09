@@ -19,7 +19,9 @@ if (isset($_SESSION['userID'])) {
       } else {
         for ($i = 0; $i < count($product_ids); $i++) {
           if ($product_ids[$i] == $_POST['bookID']) {
-            $_SESSION['cart'][$i]['quantity'] += $_POST['quantity'];
+            if ($_SESSION['cart'][$i]['quantity'] != 10) {
+              $_SESSION['cart'][$i]['quantity'] += $_POST['quantity'];
+            }
           }
         }
       }
@@ -69,7 +71,7 @@ $count = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
         <a href="javascript:void(0);" onclick="cartDropdown()">
           <span id="cart-text" class="hidden-sm">View Cart </span>
           <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-          <span class="badge"><?=$count?></span>
+          <span class="badge"><?= $count ?></span>
         </a>
         <a href="includes/logout.inc.php" title="Logout"><span class="hidden-sm">Logout </span> <i class="fa fa-sign-out" aria-hidden="true"></i></a>
       <?php endif; ?>
@@ -80,21 +82,7 @@ $count = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
   </header>
 
   <!-- Shopping cart start -->
-  <div class="shopping-cart hide" id="modal-cart">
-    <div class="shopping-cart-header">
-      Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
-      <span class="shopping-cart-total">Total: <span class="money-text">R 100</span></span>
-    </div>
-    <ul class="shopping-cart-items">
-      <li class="clearfix">
-        <img src="assets/Pearson Bookstore Black.png" alt="item1" />
-        <span class="item-name" title="Introduction to Programming">Introduction to Programming</span>
-        <span class="item-price">R100</span>
-        <span class="item-quantity">Quantity: 1</span>
-      </li>
-    </ul>
-    <a href="viewcart.php" class="btn btn-sm btn-blue btn-100">Checkout</a>
-  </div>
+  <?php require_once "includes/shopping_cart_popup.inc.php" ?>
   <!-- Shopping cart end -->
   <div class="custom-container">
     <div class="header-message">
@@ -150,8 +138,8 @@ $count = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
                 <button class="btn btn-green" type="submit" name="add-cart-submit">Add to Cart</button>
               </form>
         <?php
-            else:
-              echo '<div class="error-msg">You need to <a href=login.php?redirect=viewbook.php?id='.$_GET['id'].' class="bold underlined">login</a> to add to cart</div>';
+            else :
+              echo '<div class="error-msg">You need to <a href=login.php?redirect=viewbook.php?id=' . $_GET['id'] . ' class="bold underlined">login</a> to add to cart</div>';
             endif;
           endwhile;
         else :

@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'includes/contact.inc.php';
+$count = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +30,7 @@ require 'includes/contact.inc.php';
             <?php endif; ?>
             <?php if (isset($_SESSION['userID'])) : ?>
                 <a href="javascript:void(0);" onclick="cartDropdown()">
-                    <span id="cart-text" class="hidden-sm">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
+                    <span id="cart-text" class="hidden-sm">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge"><?php echo $count; ?></span>
                 </a>
                 <a href="viewprofile.php" title="View Profile" id="user-profile"><span class="hidden-sm">Profile </span><i class="fa fa-user" aria-hidden="true"></i></a>
                 <a href="includes/logout.inc.php" title="Logout"><span class="hidden-sm">Logout </span><i class="fa fa-sign-out" aria-hidden="true"></i></a>
@@ -39,23 +40,11 @@ require 'includes/contact.inc.php';
             <i class="fa fa-bars"></i>
         </a>
     </nav>
-    <!-- Shopping cart start -->
-    <div class="shopping-cart hide" id="modal-cart">
-        <div class="shopping-cart-header">
-            Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">3</span>
-            <span class="shopping-cart-total">Total: <span class="money-text"> R 3000</span></span>
-        </div>
-        <ul class="shopping-cart-items">
-            <li class="clearfix">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg" alt="item1" />
-                <span class="item-name">Introduction to Programming</span>
-                <span class="item-price">R100</span>
-                <span class="item-quantity"> Quantity: 10</span>
-            </li>
-        </ul>
-        <a class="btn btn-100 primary">Checkout</a>
-    </div>
-    <!-- Shopping cart end -->
+    <?php if (isset($_SESSION['userID'])) : ?>
+        <!-- Shopping cart start -->
+        <?php require_once "includes/shopping_cart_popup.inc.php" ?>
+        <!-- Shopping cart end -->
+    <?php endif; ?>
     <div class="container">
         <div class="header-message">
             <h1>Support Form</h1>

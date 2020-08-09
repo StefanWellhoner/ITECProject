@@ -303,7 +303,7 @@ input[type="button"]:focus {
 
 .shopping-cart:after {
   bottom: 100%;
-  left: 57%;
+  left: 58%;
   border: solid transparent;
   content: " ";
   height: 0;
@@ -446,4 +446,37 @@ h6 {
   text-align: center;
   color: #333333;
   font-size: 48px;
+}
+
+/*
+    Table
+*/
+
+table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid #DDD;
+  border-top: 1px solid #DDD;
+}
+
+tr:nth-child(even) {
+  background-color: #FFF;
+}
+
+tr:nth-child(odd) {
+  background-color: #EFEFEF;
+}
+
+tr:last-child>td{
+  text-align: right;
+}
+
+td>a {
+  color: rgb(71, 128, 233);
 }

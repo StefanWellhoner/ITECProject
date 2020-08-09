@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION['userID'])){
+if (isset($_SESSION['userID'])) {
   header('Location: index.php');
 }
 ?>
@@ -19,19 +19,28 @@ if(isset($_SESSION['userID'])){
 </head>
 
 <body>
-  <div class="navbar" id="topnav">
+  <nav class="navbar" id="topnav">
     <a href="index.php">Pearson Bookstore</a>
     <div class="nav-right">
       <a href="index.php">Home</a>
       <a href="shop.php">Shop</a>
       <a href="about.php">About</a>
       <a href="support.php">Support</a>
+      <?php if (!isset($_SESSION['userID'])) : ?>
+        <a href="login.php">Login</a>
+      <?php endif; ?>
+      <?php if (isset($_SESSION['userID'])) : ?>
+        <a href="javascript:void(0);" onclick="cartDropdown()">
+          <span id="cart-text" class="hidden-sm">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge"><?php echo $count; ?></span>
+        </a>
+        <a href="viewprofile.php" title="View Profile" id="user-profile"><span class="hidden-sm">Profile </span><i class="fa fa-user" aria-hidden="true"></i></a>
+        <a href="includes/logout.inc.php" title="Logout"><span class="hidden-sm">Logout </span><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+      <?php endif; ?>
     </div>
-    <a href="javascript:void(0);" class="icon" onclick="collapse()">
+    <a href="JavaScript:void(0)" class="icon" onclick="collapse()">
       <i class="fa fa-bars"></i>
     </a>
-
-  </div>
+  </nav>
   <!-- Shopping cart start -->
   <div class="shopping-cart hide" id="modal-cart">
     <div class="shopping-cart-header">
