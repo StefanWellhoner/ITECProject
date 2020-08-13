@@ -60,26 +60,28 @@ $count = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
 </head>
 
 <body>
-  <header class="navbar" id="topnav">
+  <nav class="navbar" id="topnav">
     <a href="index.php">Pearson Bookstore</a>
-    <nav class="nav-right">
+    <div class="nav-right">
       <a href="index.php">Home</a>
       <a href="shop.php" class="active">Shop</a>
       <a href="about.php">About</a>
       <a href="support.php">Support</a>
+      <?php if (!isset($_SESSION['userID'])) : ?>
+        <a href="login.php">Login</a>
+      <?php endif; ?>
       <?php if (isset($_SESSION['userID'])) : ?>
         <a href="javascript:void(0);" onclick="cartDropdown()">
-          <span id="cart-text" class="hidden-sm">View Cart </span>
-          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-          <span class="badge"><?= $count ?></span>
+          <span id="cart-text" class="hidden-sm">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge"><?php echo $count; ?></span>
         </a>
-        <a href="includes/logout.inc.php" title="Logout"><span class="hidden-sm">Logout </span> <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+        <a href="viewprofile.php" title="View Profile" id="user-profile"><span class="hidden-sm">Profile </span><i class="fa fa-user" aria-hidden="true"></i></a>
+        <a href="includes/logout.inc.php" title="Logout"><span class="hidden-sm">Logout </span><i class="fa fa-sign-out" aria-hidden="true"></i></a>
       <?php endif; ?>
-    </nav>
+    </div>
     <a href="JavaScript:void(0)" class="icon" onclick="collapse()">
       <i class="fa fa-bars"></i>
     </a>
-  </header>
+  </nav>
 
   <!-- Shopping cart start -->
   <?php require_once "includes/shopping_cart_popup.inc.php" ?>

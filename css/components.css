@@ -473,10 +473,6 @@ tr:nth-child(odd) {
   background-color: #EFEFEF;
 }
 
-tr:last-child>td{
-  text-align: right;
-}
-
 td>a {
   color: rgb(71, 128, 233);
 }

@@ -61,9 +61,7 @@ $count = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
     </a>
   </nav>
   <?php if (isset($_SESSION['userID'])) : ?>
-    <!-- Shopping cart start -->
     <?php require_once "includes/shopping_cart_popup.inc.php" ?>
-    <!-- Shopping cart end -->
   <?php endif; ?>
   <div class="container">
     <div class="header-message">
@@ -125,7 +123,7 @@ $count = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
     </form>
     <h4>Address <a href="address.php" style="font-size: 0.75em; color: #333;"><i class="fa fa-plus-circle"></i></a></h4>
     <?php if ($resultMsg !== "") : ?>
-      <div class="success-msg" id="result-msg">
+      <div class="error-msg" id="result-msg">
         <?php echo $resultMsg; ?>
       </div>
     <?php endif; ?>
@@ -147,6 +145,29 @@ $count = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
     <?php endwhile;
     endif;
     ?>
+    <h4>Order History</h4>
+    <table>
+      <tr>
+        <th>Order Number</th>
+        <th>Status</th>
+        <th>Grand Total</th>
+        <th>Order Date</th>
+      </tr>
+      <?php
+      $orderQuery = "SELECT * FROM `order` WHERE userID = $userID ORDER BY `orderDate` DESC;";
+      if ($result = mysqli_query($conn, $orderQuery)) :
+        while ($row = mysqli_fetch_array($result)) :
+      ?>
+        <tr>          
+          <td><?= $row['orderID'] ?></td>
+          <td><?= $row['status'] ?></td>
+          <td>R<?= $row['grandTotal'] ?></td>
+          <td><?= $row['orderDate'] ?></td>
+        </tr>
+      <?php endwhile;
+      endif;
+      ?>
+    </table>
   </div>
 </body>
 <?php include "footer.php" ?>

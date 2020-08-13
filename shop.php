@@ -96,9 +96,13 @@ $count = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
                         <?php
                         $sql = "SELECT * FROM category";
                         if ($result = mysqli_query($conn, $sql)) :
-                            while ($row = mysqli_fetch_array($result)) : ?>
-                                <option value="<?php echo $row['categoryID'] ?>" <?php echo ($row['categoryID'] == $_GET['cat']) ? "selected" : "" ?>><?php echo $row['cat_name'] ?></option>
-                        <?php endwhile;
+                            while ($row = mysqli_fetch_array($result)) :
+                                if (isset($_GET['cat'])) : ?>
+                                    <option value="<?php echo $row['categoryID'] ?>" <?php echo ($row['categoryID'] == $_GET['cat']) ? "selected" : "" ?>><?php echo $row['cat_name'] ?></option>
+                                <?php else : ?>
+                                    <option value="<?php echo $row['categoryID'] ?>"><?php echo $row['cat_name'] ?></option>
+                        <?php endif;
+                            endwhile;
                         endif;
                         ?>
                     </select>

@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'includes/address.inc.php';
+$count = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
