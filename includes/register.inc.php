@@ -44,7 +44,7 @@ if (isset($_POST['register-submit'])) {
         header("Location: ../register.php?error=emailreg&name=" . $firstname . "&lastname=" . $lastname . "&number=" . $number . "&dob=" . $dob);
         exit();
       } else {
-        $sql = "INSERT INTO user(`email`,`password`,`firstname`,`lastname`,`phoneNumber`,`dateOfBirth`) VALUES (?,?,?,?,?,?)";
+        $sql = "INSERT INTO user(`email`,`password`,`firstname`,`lastname`,`phoneNumber`,`dateOfBirth`) VALUES (?,?,?,?,?,?)";        
         $stmt = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmt, $sql)) {
           header("Location: ../register.php?error=sqlerror");
@@ -53,8 +53,22 @@ if (isset($_POST['register-submit'])) {
           $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
           mysqli_stmt_bind_param($stmt, "ssssss", $email, $hashedpassword, $firstname, $lastname, $number, $dob);
           mysqli_stmt_execute($stmt);
-          header("Location: ../register.php?register=success");
-          exit();
+          $cart = "INSERT INTO cart(`cartTotal`,`userID`) VALUES (0,?)";
+          $stmt = mysqli_stmt_init($conn);
+          if (!mysqli_stmt_prepare($stmt, $cart)) {
+            header("Location: ../register.php?error=sqlerror");
+            exit();
+          } else {
+            $user = "SELECT `userID` FROM user WHERE `email` = '$email'";
+            if($result = mysqli_query($conn,$user)){
+              $row = mysqli_fetch_array($result);
+              $userID = $row['userID'];
+            }
+            mysqli_stmt_bind_param($stmt, "i", $userID);
+            mysqli_stmt_execute($stmt);            
+            header("Location: ../register.php?register=success");
+            exit();
+          }
         }
       }
     }

@@ -110,8 +110,8 @@
   background-color: #009220;
   position: fixed;
   z-index: 800;
-  right: 2rem;
-  bottom: 2rem;
+  right: 30px;
+  bottom: 90px;
   border: 1px solid transparent;
   box-shadow: 1px 1px 10px #555555;
   transition: 0.5s;
@@ -193,7 +193,7 @@ textarea:focus {
 }
 
 input[type="date"] {
-  padding: 18px 0.75rem;  
+  padding: 18px 0.75rem;
   font-size: 14px;
   font-family: inherit;
 }
@@ -215,6 +215,7 @@ input[type="button"]:focus {
 .navbar {
   background-color: #0277bd;
   overflow: hidden;
+  box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.5);
 }
 
 .navbar a {
@@ -229,7 +230,7 @@ input[type="button"]:focus {
   font-size: 16px;
   font-weight: 600;
   background-color: #0277bd;
-  font-family: 'Fairplay Display', 'sans-serif';
+  font-family: "Fairplay Display", "sans-serif";
   transition-duration: 0.4s;
 }
 
@@ -371,21 +372,6 @@ ul.shopping-cart-items {
 }
 
 /*
-    Footer
-*/
-
-footer {
-  position: relative;
-  margin: 0;
-  width: 100%;
-  bottom: 0;
-  padding: 20px 0;
-  margin-top: 40px;
-  background-color: #008cba;
-  color: white;
-}
-
-/*
     Headers
  */
 
@@ -452,27 +438,34 @@ h6 {
     Table
 */
 
-table{
+table {
   width: 100%;
   border-collapse: collapse;
 }
-
+table > tbody> tr > th {
+  background-color: #008cba;
+  color: #FFFFFF;
+}
 th,
 td {
   padding: 16px;
   text-align: left;
-  border-bottom: 1px solid #DDD;
-  border-top: 1px solid #DDD;
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
 }
 
 tr:nth-child(even) {
-  background-color: #FFF;
+  background-color: #fff;
 }
 
 tr:nth-child(odd) {
-  background-color: #EFEFEF;
+  background-color: #efefef;
 }
 
-td>a {
+td > a {
   color: rgb(71, 128, 233);
+}
+
+.table-responsive {
+  overflow-x: scroll;
 }

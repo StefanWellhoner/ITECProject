@@ -17,53 +17,56 @@ $count = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
 </head>
 
 <body>
-    <nav class="navbar" id="topnav">
-        <a href="index.php">Pearson Bookstore</a>
-        <div class="nav-right">
-            <a href="index.php">Home</a>
-            <a href="shop.php">Shop</a>
-            <a href="about.php" class="active">About</a>
-            <a href="support.php">Support</a>
-            <?php if (!isset($_SESSION['userID'])) : ?>
-                <a href="login.php">Login</a>
-            <?php endif; ?>
-            <?php if (isset($_SESSION['userID'])) : ?>
-                <a href="javascript:void(0);" onclick="cartDropdown()">
-                    <span id="cart-text" class="hidden-sm">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge"><?php echo $count; ?></span>
-                </a>
-                <a href="viewprofile.php" title="View Profile" id="user-profile"><span class="hidden-sm">Profile </span><i class="fa fa-user" aria-hidden="true"></i></a>
-                <a href="includes/logout.inc.php" title="Logout"><span class="hidden-sm">Logout </span><i class="fa fa-sign-out" aria-hidden="true"></i></a>
-            <?php endif; ?>
-        </div>
-        <a href="JavaScript:void(0)" class="icon" onclick="collapse()">
-            <i class="fa fa-bars"></i>
-        </a>
-    </nav>
-    <?php if (isset($_SESSION['userID'])) : ?>
-        <!-- Shopping cart start -->
-        <?php require_once "includes/shopping_cart_popup.inc.php" ?>
-        <!-- Shopping cart end -->
-    <?php endif; ?>
-    <div class="container">
-        <div class="separate-bar text-center">
-            <img src="assets/Pearson Bookstore icon.png" style="height: auto; width: 100%; max-width:510px;">
-        </div>
-        <div class="row">
-            <div id="about-us" class="col-12 col-md-6">
-                <h4>About Us</h4>
-                <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil hic id at nesciunt velit ad atque placeat vitae voluptate non, doloremque, nostrum, illo libero iusto totam sapiente aperiam dolorum quasi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil hic id at nesciunt velit ad atque placeat vitae voluptate non, doloremque, nostrum, illo libero iusto totam sapiente aperiam dolorum quasi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil hic id at nesciunt velit ad atque placeat vitae voluptate non, doloremque, nostrum, illo libero iusto totam sapiente aperiam dolorum quasi.</p>
+    <div class="wrapper">
+        <nav class="navbar" id="topnav">
+            <a href="index.php">Pearson Bookstore</a>
+            <div class="nav-right">
+                <a href="index.php">Home</a>
+                <a href="shop.php">Shop</a>
+                <a href="about.php" class="active">About</a>
+                <a href="support.php">Support</a>
+                <?php if (!isset($_SESSION['userID'])) : ?>
+                    <a href="login.php">Login</a>
+                <?php endif; ?>
+                <?php if (isset($_SESSION['userID'])) : ?>
+                    <a href="javascript:void(0);" onclick="cartDropdown()">
+                        <span id="cart-text" class="hidden-sm">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge"><?php echo $count; ?></span>
+                    </a>
+                    <a href="viewprofile.php" title="View Profile" id="user-profile"><span class="hidden-sm">Profile </span><i class="fa fa-user" aria-hidden="true"></i></a>
+                    <a href="includes/logout.inc.php" title="Logout"><span class="hidden-sm">Logout </span><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                <?php endif; ?>
             </div>
-            <div id="operating-hours" class="col-12 col-md-6">
-                <h4>Contact Us</h4>
-                <p><span class="bold">Telephone:</span> 0781726444<br><span class="bold">Email:</span> support@peasonbookstore.co.za</p>
-                <span class="bold">Operating Hours:</span>
-                <ul>
-                    <li>Monday to Friday: 7:00am - 5:00pm</li>
-                    <li>Satderday to Sunday: 8:00am - 2:00pm</li>
-                    <li>Public Holidays: Closed</li>
-                </ul>
+            <a href="JavaScript:void(0)" class="icon" onclick="collapse()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </nav>
+        <?php if (isset($_SESSION['userID'])) : ?>
+            <!-- Shopping cart start -->
+            <?php require_once "includes/shopping_cart_popup.inc.php" ?>
+            <!-- Shopping cart end -->
+        <?php endif; ?>
+        <div class="container">
+            <div class="separate-bar text-center">
+                <img src="assets/Pearson Bookstore icon.png" style="height: auto; width: 100%; max-width:510px;">
+            </div>
+            <div class="row">
+                <div id="about-us" class="col-12 col-md-6">
+                    <h4>About Us</h4>
+                    <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil hic id at nesciunt velit ad atque placeat vitae voluptate non, doloremque, nostrum, illo libero iusto totam sapiente aperiam dolorum quasi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil hic id at nesciunt velit ad atque placeat vitae voluptate non, doloremque, nostrum, illo libero iusto totam sapiente aperiam dolorum quasi.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil hic id at nesciunt velit ad atque placeat vitae voluptate non, doloremque, nostrum, illo libero iusto totam sapiente aperiam dolorum quasi.</p>
+                </div>
+                <div id="operating-hours" class="col-12 col-md-6">
+                    <h4>Contact Us</h4>
+                    <p><span class="bold">Telephone:</span> 0781726444<br><span class="bold">Email:</span> support@peasonbookstore.co.za</p>
+                    <span class="bold">Operating Hours:</span>
+                    <ul>
+                        <li>Monday to Friday: 7:00am - 5:00pm</li>
+                        <li>Satderday to Sunday: 8:00am - 2:00pm</li>
+                        <li>Public Holidays: Closed</li>
+                    </ul>
+                </div>
             </div>
         </div>
+        <div class="push"></div>
     </div>
 </body>
 <?php include "footer.php" ?>

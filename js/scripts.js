@@ -31,13 +31,17 @@ function windowBreakpoint(breakpoint992) {
     }
 }
 
-function editProfile() {
-    document.getElementById('submit').classList.toggle('hide');
-    document.getElementById('editprofile').classList.toggle('hide');
+$('#editprofile').on('click',function (){
+    $(this).toggleClass('hide');
+    $('#submit').toggleClass('hide');
+    $('#firstname').prop('disabled',false);
+    $('#lastname').prop('disabled',false);
+    $('#number').prop('disabled',false);
+    $('#dob').prop('disabled',false);
+});
 
-}
-
-function saveChanges() {
-    document.getElementById('submit').classList.toggle('hide');
-    document.getElementById('editprofile').classList.toggle('hide');
-}
+// $('#submit').on('click',function (){
+//     $(this).toggleClass('hide');
+//     $('#editprofile').toggleClass('hide');
+//     $('#email').prop('disabled',true);
+// });

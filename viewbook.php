@@ -4,6 +4,10 @@ include_once "includes/conn.inc.php";
 $product_ids = array();
 if (isset($_SESSION['userID'])) {
   if (isset($_POST['add-cart-submit'])) {
+
+    $newCartItem = "INSERT INTO cart_item(`item_quantity`,`totalPrice`, `cartID`, `bookID`) VALUES (?,?,?,?)";
+
+
     if (isset($_SESSION['cart'])) {
       $count = count($_SESSION['cart']);
 
@@ -33,6 +37,7 @@ if (isset($_SESSION['userID'])) {
         'quantity' => $_POST['quantity'],
       );
     }
+    header("Location: ./viewbook.php?id=" . $_POST['bookID']);
   }
 }
 $count = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
@@ -60,100 +65,100 @@ $count = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
 </head>
 
 <body>
-  <nav class="navbar" id="topnav">
-    <a href="index.php">Pearson Bookstore</a>
-    <div class="nav-right">
-      <a href="index.php">Home</a>
-      <a href="shop.php" class="active">Shop</a>
-      <a href="about.php">About</a>
-      <a href="support.php">Support</a>
-      <?php if (!isset($_SESSION['userID'])) : ?>
-        <a href="login.php">Login</a>
-      <?php endif; ?>
-      <?php if (isset($_SESSION['userID'])) : ?>
-        <a href="javascript:void(0);" onclick="cartDropdown()">
-          <span id="cart-text" class="hidden-sm">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge"><?php echo $count; ?></span>
-        </a>
-        <a href="viewprofile.php" title="View Profile" id="user-profile"><span class="hidden-sm">Profile </span><i class="fa fa-user" aria-hidden="true"></i></a>
-        <a href="includes/logout.inc.php" title="Logout"><span class="hidden-sm">Logout </span><i class="fa fa-sign-out" aria-hidden="true"></i></a>
-      <?php endif; ?>
-    </div>
-    <a href="JavaScript:void(0)" class="icon" onclick="collapse()">
-      <i class="fa fa-bars"></i>
-    </a>
-  </nav>
+  <div class="wrapper">
+    <nav class="navbar" id="topnav">
+      <a href="index.php">Pearson Bookstore</a>
+      <div class="nav-right">
+        <a href="index.php">Home</a>
+        <a href="shop.php" class="active">Shop</a>
+        <a href="about.php">About</a>
+        <a href="support.php">Support</a>
+        <?php if (!isset($_SESSION['userID'])) : ?>
+          <a href="login.php">Login</a>
+        <?php endif; ?>
+        <?php if (isset($_SESSION['userID'])) : ?>
+          <a href="javascript:void(0);" onclick="cartDropdown()">
+            <span id="cart-text" class="hidden-sm">View Cart </span> <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge"><?php echo $count; ?></span>
+          </a>
+          <a href="viewprofile.php" title="View Profile" id="user-profile"><span class="hidden-sm">Profile </span><i class="fa fa-user" aria-hidden="true"></i></a>
+          <a href="includes/logout.inc.php" title="Logout"><span class="hidden-sm">Logout </span><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+        <?php endif; ?>
+      </div>
+      <a href="JavaScript:void(0)" class="icon" onclick="collapse()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </nav>
 
-  <!-- Shopping cart start -->
-  <?php require_once "includes/shopping_cart_popup.inc.php" ?>
-  <!-- Shopping cart end -->
-  <div class="custom-container">
-    <div class="header-message">
-      <h1>Shop</h1>
-    </div>
-    <div class="row">
-      <?php
-      $bookID = $_GET["id"];
-      $bookQuery = "SELECT `book`.*, `category`.* FROM `book` INNER JOIN `category` ON `book`.categoryID = `category`.`categoryID` WHERE bookID = $bookID";
-      $authorQuery = "SELECT author.authorID, author.auth_firstname, author.auth_surname FROM `book_author` INNER JOIN `author` ON book_author.authorID = author.authorID WHERE book_author.bookID = $bookID;";
-      $result = $conn->query($bookQuery);
-      if ($result->num_rows > 0) :
-        while ($row = $result->fetch_assoc()) :
-      ?>
-          <div class="col-lg-4 col-md-4 col-sm-6 col-8">
-            <div style="text-align: center;">
-              <img id="bookImage" src="<?= $row['bookImage'] ?>" style="height: auto; min-height: 250px;" />
-            </div>
-          </div>
-          <div class="col-lg-8 col-md-8 col-sm-12 col-12">
-            <h4><?= $row['bookTitle'] ?></h4>
-            <p class="book-info">Edition: <?= $row["bookEdition"] ?></p>
-            <p class="book-info">Total Pages: <?= $row["bookPage"] ?> pages</p>
-            <p class="book-info">Release Date: <?= $row["bookReleaseDate"] ?></p>
-            <p class="book-info">Authors:
-              <?php
-              $authorResult = $conn->query($authorQuery);
-              if ($authorResult->num_rows > 0) :
-                while ($author = $authorResult->fetch_assoc()) :
-                  echo "<a class='author-link' href='shop.php?search=" . $author['authorID'] . "'>" . $author['auth_firstname'] . " " . $author['auth_surname'] . "</a>";
-                  if ($author['authorID'] != $authorResult->num_rows) :
-                    echo ", ";
-                  else :
-                    echo "<br/>";
-                  endif;
-                endwhile;
-              else :
-                echo "No Authors Found";
-              endif;
-              ?></p>
-            <p class="book-info">Category: <a class="author-link" href="shop.php?search=&auth=&cat=<?php echo $row['categoryID'] ?>"><?php echo $row["cat_name"] ?></a></p>
-            <p>Price: <span class="money-text">R <?php echo $row['bookPrice'] ?></span></p>
-            <?php
-            if (isset($_SESSION['userID'])) : ?>
-              <form action="viewbook.php?action=add&id=<?= $row['bookID'] ?>" method="POST">
-                <div class="form-group">
-                  <label for="quantity">Quantity: </label>
-                  <input type="number" name="quantity" id="quantity" min="1" max="10" value="1" tabindex="1" class="form-control" required />
-                  <input type="hidden" name="bookID" value="<?= $row['bookID'] ?>" />
-                  <input type="hidden" name="bookPrice" value="<?= $row['bookPrice'] ?>" />
-                  <input type="hidden" name="bookTitle" value="<?= $row['bookTitle'] ?>" />
-                </div>
-                <button class="btn btn-green" type="submit" name="add-cart-submit">Add to Cart</button>
-              </form>
+    <!-- Shopping cart start -->
+    <?php require_once "includes/shopping_cart_popup.inc.php" ?>
+    <!-- Shopping cart end -->
+    <div class="custom-container">
+      <div class="header-message">
+        <h1>Shop</h1>
+      </div>
+      <div class="row">
         <?php
-            else :
-              echo '<div class="error-msg">You need to <a href=login.php?redirect=viewbook.php?id=' . $_GET['id'] . ' class="bold underlined">login</a> to add to cart</div>';
-            endif;
-          endwhile;
-        else :
-          echo "0 results";
-        endif; ?>
-          </div>
+        $bookID = $_GET["id"];
+        $bookQuery = "SELECT `book`.*, `category`.* FROM `book` INNER JOIN `category` ON `book`.categoryID = `category`.`categoryID` WHERE bookID = $bookID";
+        $authorQuery = "SELECT author.authorID, author.auth_firstname, author.auth_surname FROM `book_author` INNER JOIN `author` ON book_author.authorID = author.authorID WHERE book_author.bookID = $bookID;";
+        $result = $conn->query($bookQuery);
+        if ($result->num_rows > 0) :
+          while ($row = $result->fetch_assoc()) :
+        ?>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-8">
+              <div style="text-align: center;">
+                <img id="bookImage" src="<?= $row['bookImage'] ?>" style="height: auto; min-height: 250px;" />
+              </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-12 col-12">
+              <h4><?= $row['bookTitle'] ?></h4>
+              <p class="book-info">Edition: <?= $row["bookEdition"] ?></p>
+              <p class="book-info">Total Pages: <?= $row["bookPage"] ?> pages</p>
+              <p class="book-info">Release Date: <?= $row["bookReleaseDate"] ?></p>
+              <p class="book-info">Authors:
+                <?php
+                $authorResult = $conn->query($authorQuery);
+                if ($authorResult->num_rows > 0) :
+                  while ($author = $authorResult->fetch_assoc()) :
+                    echo "<a class='author-link' href='shop.php?search=" . $author['authorID'] . "'>" . $author['auth_firstname'] . " " . $author['auth_surname'] . "</a>";
+                    if ($author['authorID'] != $authorResult->num_rows) :
+                      echo ", ";
+                    else :
+                      echo "<br/>";
+                    endif;
+                  endwhile;
+                else :
+                  echo "No Authors Found";
+                endif;
+                ?></p>
+              <p class="book-info">Category: <a class="author-link" href="shop.php?search=&auth=&cat=<?php echo $row['categoryID'] ?>"><?php echo $row["cat_name"] ?></a></p>
+              <p>Price: <span class="money-text">R <?php echo $row['bookPrice'] ?></span></p>
+              <?php
+              if (isset($_SESSION['userID'])) : ?>
+                <form action="viewbook.php?action=add&id=<?= $row['bookID'] ?>" method="POST">
+                  <div class="form-group">
+                    <label for="quantity">Quantity: </label>
+                    <input type="number" name="quantity" id="quantity" min="1" max="10" value="1" tabindex="1" class="form-control" required />
+                    <input type="hidden" name="bookID" value="<?= $row['bookID'] ?>" />
+                    <input type="hidden" name="bookPrice" value="<?= $row['bookPrice'] ?>" />
+                    <input type="hidden" name="bookTitle" value="<?= $row['bookTitle'] ?>" />
+                  </div>
+                  <button class="btn btn-green" type="submit" name="add-cart-submit">Add to Cart</button>
+                </form>
+          <?php
+              else :
+                echo '<div class="error-msg">You need to <a href=login.php?redirect=viewbook.php?id=' . $_GET['id'] . ' class="bold underlined">login</a> to add to cart</div>';
+              endif;
+            endwhile;
+          else :
+            echo "0 results";
+          endif; ?>
+            </div>
+      </div>
     </div>
+    <div class="push"></div>
   </div>
 </body>
-<footer>
-  <p class="text-center">Footer</p>
-</footer>
 <script src="js/scripts.js"></script>
-
+<?php include 'footer.php'; ?>
 </html>
